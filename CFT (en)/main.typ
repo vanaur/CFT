@@ -51,9 +51,9 @@
 
 #let theorem = thmbox("theorem", "Théorème", fill: rgb("#eeffee")).with(numbering: none)
 #let definition = thmbox("definition", "Définition", fill: rgb("#eeeeff")).with(numbering: none)
-#let example = thmbox("example", "Exemple", titlefmt: strong, fill: rgb("eeffee")).with(numbering: none)
+#let example = thmbox("example", "Example", titlefmt: strong, fill: rgb("eeffee")).with(numbering: none)
 #let proof = thmbox("proof", "Preuve", titlefmt: strong).with(numbering: none)
-#let remark = thmbox("remark", "Remarque", titlefmt: strong, fill: rgb(gray)).with(numbering: none)
+#let remark = thmbox("remark", "Remark", titlefmt: strong, fill: rgb(gray)).with(numbering: none)
 
 // -- Paragraph configuration --
 
@@ -134,7 +134,7 @@ Before going any further, let us clarify that the renormalization "group" has no
 We will introduce the concept through various examples, both discrete and continuous.
 
 == 1D Ising spin chain
-Consider a one-dimensional chain composed of $N$ spins with a coupling constant $J$ between each neighbor.
+Consider a one-dimensional chain composed of $N$ spins with a coupling constant $0 <= J <= 1$ between each neighbor.
 
 #v(1em)
 #figure(
@@ -206,7 +206,7 @@ In fact, this is simply the original partition function, but where we have expli
 
 $
   z &= sum_({sigma_i = plus.minus 1})^(i = 0, 2) sum_({sigma_1}) exp(beta J (sigma_0 sigma_1 + sigma_1 sigma_2)) \
-    &= sum_({sigma_i = plus.minus 1})^(i = 0, 2) [ e^(beta J (sigma_0 + sigma_2)) + e^(-beta J (sigma_0 sigma_2)) ] \
+    &= sum_({sigma_i = plus.minus 1})^(i = 0, 2) [ e^(beta J (sigma_0 + sigma_2)) + e^(-beta J (sigma_0 + sigma_2)) ] \
     &= sum_({sigma_i = plus.minus 1})^(i = 0, 2) 2 cosh[beta J (sigma_0 + sigma_2)].
 $ <z1>
 
@@ -244,7 +244,7 @@ $
 
 So we have obtained an expression for the scaled coupling constant, $J'$, which physically describes the interactions between the remaining spins after a decimation step. Hence, for a given initial $J$ (which corresponds to the still unrenormalized system), we have a recursive relation that we can apply a number of times and which will correspond, by construction, to this renormalization procedure where, at each step, we zoom out a little more and get rid of the microscopic details of the system!
 
-What happens when we iterate enough times? Suppose the initial system is such that $J = 1$ and the temperature, constant, is high (i.e., $beta$ is very small). Then, $ cosh(x) = 1 + x^2/2! + x^4/4! + cal(O)(x^6) $ which, in our case, gives us $ cosh(2 beta J) approx 1 + 2 (beta J)^2. $ Then, $ log[cosh(2 beta J)] approx log(1 + 2 (beta J)^2) approx 2 (beta J)^2 $ where we used $log(1 + x) approx x$ for $x$ to be small enough. We substitute this result into our formula for $J'$ and then find the new relation $ J' = 1/(2 beta) log[cosh(2 beta J)] approx 1/(2 beta) [2 (beta J)^2] = beta J^2. $ So, when the temperature is high enough, and therefore $beta$ is small enough, we get a new coupling $J' approx beta J^2$ which is _smaller_ than $J$ (recall that $0 < J <= 1$ and that $beta < 1$). In other words, the more we "zoom out" the more the coupling constant tends towards zero, we can conclude that $J$ is a useless variable for describing the large-scale properties of the system! We can also implement the previous recursive function numerically, after a few iterations we get the following table:
+What happens when we iterate enough times? Suppose the initial system is such that the temperature is high (i.e., $beta$ is very small). Then, $ cosh(x) = 1 + x^2/2! + x^4/4! + cal(O)(x^6) $ which, in our case, gives us $ cosh(2 beta J) approx 1 + 2 (beta J)^2. $ Then, $ log[cosh(2 beta J)] approx log(1 + 2 (beta J)^2) approx 2 (beta J)^2 $ where we used $log(1 + x) approx x$ for $x$ to be small enough. We substitute this result into our formula for $J'$ and then find the new relation $ J' = 1/(2 beta) log[cosh(2 beta J)] approx 1/(2 beta) [2 (beta J)^2] = beta J^2. $ So, when the temperature is high enough, and therefore $beta$ is small enough, we get a new coupling $J' approx beta J^2$ which is _smaller_ than $J$ (recall that $0 < J <= 1$ and that $beta << 1$). In other words, the more we "zoom out" the more the coupling constant tends towards zero, we can conclude that $J$ is a useless variable for describing the large-scale properties of the system! We can also implement the previous recursive function numerically. For example, after a few iterations, we get the following table:
 
 #align(center)[
   #table(
@@ -270,7 +270,7 @@ $
   H = -sum_(angle.l, j angle.r) J sigma^x_i sigma^x_j - sum_i h sigma^z_i
 $
 
-We will apply the RG method, this time using a similar form of decimation, but one that better captures the physics of the system and is simpler to implement given the situation. Instead of counting the contribution of every other spin, we will count the contribution of pairs of spins, in other words, we form a "big spin" from two neighboring spins and choose to assign to the latter the lowest energy of the two composite spins in order to maintain the appearance of a low-energy system (if we did the opposite, at each step of the decimation, the system would potentially gain energy, which is not representative of the system). This decimation method is called "spin blocks". We will not give the derivation of the recursive formula but only give the final result, which actually consists of a relation for the coupling constant and a relation for the external magnetic field:
+We will apply the RG method, this time using a similar form of decimation, but one that better captures the physics of the system and is simpler to implement given the situation. Instead of counting the contribution of every other spin, we will count the contribution of pairs of spins, in other words, we form a "big spin" from two neighboring spins and choose to assign to the latter the lowest energy of the two composite spins in order to maintain the appearance of a low-energy system (if we did the opposite, at each step of the decimation, the system would potentially gain energy, which is not representative of a low energy system at the begining). This decimation method is called "spin blocks". We will not give the derivation of the recursive formula but only give the final result, which actually consists of a relation for the coupling constant and a relation for the external magnetic field:
 
 $
   & J' = frac(J^2, sqrt(J^2 + h^2)), \
@@ -281,9 +281,9 @@ We can express the ratio $h\/J$ and study numerically what happens:
 
 - For an initial ratio $h\/J > 1$, after iterations, the ratio diverges and becomes infinite. This tells us that $J$ is a less relevant variable than $h$. Physically, the material is in a paramagnetic phase;
 - For an initial ratio $h\/J < 1$, we find that the ratio converges to zero, which indicates that $J$ is a more relevant variable than $h$. The material is in a ferromagnetic phase.
-- For an initial ratio $h\/J = 1$, we constant that the ratio does not change and remains at $1$.
+- For an initial ratio $h\/J = 1$, we notice that the ratio does not change and remains at $1$.
 
-In other words, this means that the system is undergoing a phase transition! The fact that a parameter of the renormalization group (here, the ratio $h\/J$) remains constant throughout the procedure reflects the scaling invariance of the system near a critical point, and we further note that there are two distinct trends of this parameter "before" and "after" this critical point, which illustrates well the existence of different phases for this particular system.
+In other words, this means that the system is undergoing a phase transition! The fact that a parameter of the renormalization group (here, the ratio $h\/J$) remains constant throughout the procedure reflects the scaling invariance of the system near a critical point, and we further note that there are two distinct trends of this parameter "before" and "after" this critical point, which illustrates well the existence of different phases for this particular system. In fact, a slightly more detailed analysis is needed to really conclude that a phase transition is possible, depending on the stability of the system (we'll see an example later), but this initial approach using renormalization groups nevertheless points to a possible transient phenomenon.
 
 == 2D Ising model (idea)
 How can we apply the renormalization group in a more realistic 2D model? The idea remains the same: we want to find a way to "zoom out." We won't go into any detail here, but only illustrate that an ill-advised choice of decimation leads to changing the geometry of the physical system, which is exactly what we want to avoid.
@@ -374,7 +374,7 @@ We could try a variation of this decimation method, where we remove every other 
 )
 #v(1em)
 
-This configuration seems to preserve the geometry of the system! However, a careful eye will realize that this configuration amounts to performing an initial rotation of the system where each spin is distant by a factor $r -> sqrt(2) r$, in other words, this decimation method once again changes the geometry of the spin network.
+This configuration seems to preserve the geometry of the system! However, a careful eye will realize that this configuration amounts to performing an initial rotation of the system where each spin is distant by a factor $r -> sqrt(2) r$ where every second spin is removed; in other words, this decimation method once again changes the geometry of the spin network.
 
 The conclusion to this is that choosing a decimation method in $d >= 2$ must be done carefully so as not to alter the geometry of the network.
 
@@ -418,7 +418,7 @@ $
   S[phi_<, phi_>] = S_0[phi_<] + S_1[phi_>] + delta S[phi_<, phi_>]
 $
 
-where the last term corresponds to the mi xed modes (which depend on both the weak and fast modes). Wilson's procedure can be visualized as follows: we start with a system without any alteration, then we remove the high-frequency modes, and finally we "zoom out" by rescaling the pulses, as illustrated very schematically with the squirrel image below:
+where the last term corresponds to the mixed modes (which depend on both the weak and fast modes). Wilson's procedure can be visualized as follows: we start with a system without any alteration, then we remove the high-frequency modes, and finally we "zoom out" by rescaling the pulses, as illustrated very schematically with the squirrel image below:
 
 #align(center)[
   #table(
@@ -467,7 +467,7 @@ $
 where we have therefore "eliminated" the fast modes.
 
 #remark[
-  In reality, although the result is the same (up to a constant), simply "crossing out" the second term is not very rigorous. When considering the partition function, $ z = integral [cal(D) phi] space e^(-S[phi]), $ the integral over $phi_>$ is a Gaussian independent of $phi_<$ and factors by simply producing a multiplicative constant (a factor $exp(-1\/2 tr(k^2 + r))$ to be precise), but in order not to go into computational details we take a shorter route.
+  In reality, although the result is the same (up to a constant), simply "crossing out" the second term is not very rigorous. When considering the partition function, $ z = integral [cal(D) phi] space e^(-S[phi]), $ the integral over $phi_>$ is a Gaussian independent of $phi_<$ and factors by simply producing a multiplicative constant (a factor $exp(-1\/2 tr(k^2 + r))$ to be precise), but in order not to go into computational details we take a shorter route. We therefore make the constant resulting from this process implicit.
 ]
 
 Remembering the squirrel image, we want to return to an action that takes a similar form to the original. To get out of this, and this naturally introduces a _rescaling_, we set $tilde(k) := b k$ and so the bound $abs(k) < Lambda\/b$ becomes $abs(tilde(k)) < Lambda$. The slow mode $phi_<$ must also be rescaled to "regain resolution" (like the third squirrel image), so we must set a $tilde(phi)$ of the following form:
@@ -490,7 +490,7 @@ where we go from the first to the second line by factoring $b$, from the second 
 
 1. We started from an action for the $phi$ field;
 2. We decomposed $phi$ into "slow modes" and "fast modes";
-3. We got rid of fast fashions;
+3. We got rid of fast modes;
 4. We returned to an action having the same shape as originally by "zooming out".
 
 So the image we gave with the squirrel was really not misleading, we did exactly the same thing here. What do we have left now? The important point that emerged from this procedure is the redefinition (the _renormalization_) of the mass parameter #ref(<r>). As we saw previously with discrete Ising models, these parameters that appear during renormalization characterize how sensitive the system is to it at large scales. In the present case, since we are in a continuous case, we can go further: these recursive equations are similar to differential equations given an infinitesimal decimation procedure. Generally, we set
@@ -520,7 +520,7 @@ This equation, as for the discrete cases, tells us how the mass term $r$ changes
   caption: [Flow graph of the equation derived by the Wilson renormalization procedure]
 )<flux>
 
-Analytically (but we also see it on the graph #ref(<flux>)), if $r_"initial" > 0$ then $r(l) -> infinity$, if $r_"initial" < 0$ then $r(l) -> -infinity$ and if $r_"initial" = 0$ then it is a fi xed point, but unstable (the slightest perturbation makes $r(l)$ diverge), which does not indicate the existence of a phase transition (the random fluctuations of the system would not allow the fi xed point to remain fi xed and would make it diverge). In a theory with interaction (typically $phi^4$) then the procedure would indeed bring us a stable fi xed point, a sign of a phase transition.
+Analytically (but we also see it on the graph #ref(<flux>)), if $r_"initial" > 0$ then $r(l) -> infinity$, if $r_"initial" < 0$ then $r(l) -> -infinity$ and if $r_"initial" = 0$ then it is a fixed point, but unstable (the slightest perturbation makes $r(l)$ diverge), which does not indicate the existence of a phase transition (the random fluctuations of the system would not allow the fixed point to remain fixed and would make it diverge). In a theory with interaction (typically $phi^4$) then the procedure would indeed bring us a stable fixed point, a sign of a phase transition.
 
 #line()
 #v(1.5em)
@@ -545,7 +545,7 @@ As mentioned and seen earlier, it seems that symmetries under dilation, or resca
   Conformal symmetries include symmetry under dilation: conformal invariance implies scale invariance, but the converse is not true in general.
 ]
 
-Let us also note an important element: the study of a conformal theory is different depending on the dimension of the theory, in particular it is convenient to distinguish the case in dimension $d = 2$ from the more general case $d >= 3$, in fact, as we will see, a conformal theory in two dimensions (like string theory) has an infinite-dimensional algebra, while, as we will see, a CFT in $d >= 3$ has a finite-dimensional algebra. It follows that the study of conformal theories in $d >= 3$ dimensions is simpler and it is these that will interest us in the following. There are also one-dimensional CFTs, ​​but we will only mention them.
+Let us also note an important element: the study of a conformal theory is different depending on the dimension of the theory, in particular it is convenient to distinguish the case in dimension $d = 2$ from the more general case $d >= 3$, in fact, as we will see, a conformal theory in two dimensions (like string theory) has an infinite-dimensional algebra, while, as we will see, a CFT in $d >= 3$ has a finite-dimensional algebra. It follows that the study of conformal theories in $d >= 3$ dimensions is less simpler and it is these that will interest us in the following. There are also one-dimensional CFTs, ​​but we will only mention them.
 
 In most of the cases that will interest us, we will also consider a flat spacetime, so $g_(mu nu) = eta_(mu nu)$. The study of a CFT where the metric is not flat or is not sufficiently simple does not seem relevant: the physical cases whose conformal symmetries are of standard and principal interest do not involve gravity (an important counterexample is the AdS/CFT correspondence) and, if this were the case, analytical solutions would probably be too difficult to find, if any exist.
 
@@ -631,7 +631,7 @@ Finding an example that remains relatively simple is not easy, but that does not
 ]
 
 == Derivation of the conformal group and algebra
-First, we will work with an arbitrary infinitesimal transformation that we will then constrain to be conformal in order to obtain the useful relations for the following. Our approach is inspired by. Let us therefore consider a first-order infinitesimal transformation of a coordinate $x^mu$, $ x'^mu = x^mu + epsilon^mu (x) + cal(O)(epsilon^2) $<arb1> and recall that for an arbitrary change of coordinate $x -> x'$, the metric transforms according to
+First, we will work with an arbitrary infinitesimal transformation that we will then constrain to be conformal in order to obtain the useful relations for the following. Let us therefore consider a first-order infinitesimal transformation of a coordinate $x^mu$, $ x'^mu = x^mu + epsilon^mu (x) + cal(O)(epsilon^2) $<arb1> and recall that for an arbitrary change of coordinate $x -> x'$, the metric transforms according to
 
 $
   eta'_(mu nu)(x') = eta_(rho sigma) frac(partial x'^rho, partial x^mu)frac(partial x'^sigma, partial x^nu).
@@ -736,7 +736,7 @@ where $a_mu$, $b_(mu nu)$ and $c_(mu nu rho)$ are parameters to be deduced. Note
 2. We have forced this transformation to be compliant;
 3. After some manipulation, we arrived at a quadratic expression for $epsilon$.
 
-Since $epsilon$ is constrained by the definition of the conformal transformation, and this is independent of position, we are able to study each term of #ref(<quad>) individually. The first is the simplest to understand: $a_mu$ corresponds to a _translation_, it follows that the associated generator is already known (we must remember the generators of the Lorentz group), it is $hat(P)_mu = -i partial_mu$, the momentum operator. The linear term in $x^nu$, $b_(mu nu)$, corresponds to a _rescaling_. To find (or identify!) the associated generator, we will use the conformal Killing equation #ref(<temp1>) and insert a linear term $epsilon_mu = b_(mu nu) x^nu$,
+Since $epsilon$ is constrained by the definition of the conformal transformation, and this is independent of position, we are able to study each term of #ref(<quad>) individually. The first is the simplest to understand: $a_mu$ corresponds to a _translation_, it follows that the associated generator is already known (we must remember the generators of the Poincaré group), it is $hat(P)_mu = -i partial_mu$, the momentum operator. The linear term in $x^nu$, $b_(mu nu)$, corresponds to a _rescaling_. To find (or identify!) the associated generator, we will use the conformal Killing equation #ref(<temp1>) and insert a linear term $epsilon_mu = b_(mu nu) x^nu$,
 
 $
       & space partial_mu epsilon_nu + partial_nu epsilon_mu = 2/d (partial dot epsilon) eta_(mu nu) \
@@ -867,7 +867,7 @@ $
         &= frac(x^mu - b^mu x^2, 1 - 2 b dot x + b^2 x^2).
 $
 
-We can see that this is a transformation with singular points (but in infinitesimal form this is not the case, as can be seen in the table above and in any case in physics we are interested in infinitesimal transformations in the framework of Lie algebras). The denominator is indeed zero in $x^mu = b^(-2) b^mu$. This transformation can be understood as the composition of an inversion, a translation and another inversion. If we want to define a finite conformal special transformation that is globally defined then we must consider _compactification_, but this will not be discussed.
+We can see that this is a transformation with singular points (but in infinitesimal form this is not the case, as can be seen in the table above and in any case in physics we are interested in infinitesimal transformations in the framework of Lie algebras). The denominator is indeed zero in $x^mu = b^(-2) b^mu$. This transformation can be understood as the composition of an inversion $x^μ → x^μ\/x^2 = y^μ$, a translation $y^μ → y^μ − b^μ = z^μ$ and another inversion $z^μ → z^μ\/z^2 = x′^μ$. If we want to define a finite conformal special transformation that is globally defined then we must consider _compactification_, but this will not be discussed.
 
 #remark[
   Groups are non-linear and complicated objects, which is why in physics we prefer to work with spaces that are tangent to them (we often choose tangent to the identity for convenience), which corresponds to Lie algebras, where any transformation is well defined everywhere.
@@ -884,13 +884,7 @@ $
   & [hat(L)_(mu nu), L_(rho sigma)] = i (eta_(nu rho) hat(L)_(mu sigma) + eta_(mu sigma) hat(L)_(nu rho) - eta_(mu rho) hat(L)_(nu sigma) - eta_(nu sigma) hat(L)_(mu rho))
 $
 
-where all other commutators are zero. This therefore defines the Lie algebra of the conformal group. It is possible to show that the following objects:
-
-$
-  C_2 := 1/2 hat(L)^(mu nu)hat(L)_(mu nu), space.quad C_3 := 1/2 hat(L)^(mu nu)hat(L)_(nu rho)hat(L)^rho_(space.en mu), space.quad C_4 := hat(L)^(mu nu)hat(L)_(nu rho)hat(L)^(rho sigma)hat(L)_(sigma mu)
-$
-
-commute with all generators, and are therefore _casimirs_ of the algebra of the conformal group, but we will not go into further details. Moreover, in the following, we will limit the use of a small hat "$hat$" on operators.
+where all other commutators are zero. This therefore defines the Lie algebra of the conformal group.
 
 === Note on the case $d = 2$: Virasoro algebra
 We will not go into the details of a conformal theory at $d = 2$ because that is a separate topic, but will simply make some remarks on why this case is distinguished from the $d >= 3$ case, as we now have sufficient tools to understand how things differ. At $d = 2$, it is convenient to use a complex coordinate system, with $z = x^1 + i x^2$ and $overline(z) = x^1 - i x^2$. By doing this, the conformal Killing equation #ref(<temp1>) takes the following form (after some manipulation):
@@ -919,7 +913,7 @@ $
           = ((d + 2)(d + 1))/2 "generators"
 $
 
-and this is therefore the dimension of the conform algebra to $d >= 3$. Note that this corresponds to the number of generators of the group $"SO"(d + 1, 1)$ (depending on the signature adopted), in fact the group $"SO"(d + 1, 1)$ is the set of orthogonal matrices in a space of dimension $d+2$ (where we borrow the signature $(d + 1, 1)$ if we are in a Minkowski space or $(d + 2, 0)$ if we are in a Euclidean space according to the conventions) and, in general, the dimension of $"SO"(n)$ is $(n(n - 1))\/2$ or, in mi xed signature $"SO"(p, q)$, the dimension is expressed analogously as $((p + q)(p+q-1))\/2$. If we specify in the present case, i.e. $"SO"(d + 1, 1)$, then we have $ dim("SO"(d + 1, 1)) = ((d + 2)(d + 1))/2 $ and we therefore find the same dimension as for the conformal group.
+and this is therefore the dimension of the conform algebra to $d >= 3$. Note that this corresponds to the number of generators of the group $"SO"(d + 1, 1)$ (depending on the signature adopted), in fact the group $"SO"(d + 1, 1)$ is the set of orthogonal matrices in a space of dimension $d+2$ and, in general, the dimension of $"SO"(n)$ is $(n(n - 1))\/2$ or, in mixed signature $"SO"(p, q)$, the dimension is expressed analogously as $((p + q)(p+q-1))\/2$. If we specify in the present case, i.e. $"SO"(d + 1, 1)$, then we have $ dim("SO"(d + 1, 1)) = ((d + 2)(d + 1))/2 $ and we therefore find the same dimension as for the conformal group.
 
 #remark[
   In dimension $d$, rotations (or more generally orthogonal transformations) are made in two-dimensional planes. Such a "rotation plane" is defined by the choice of two axes among $d$ possible, the number of ways to choose $2$ axes among $d$ is $ binom(d, 2) = (d(d - 1))/2 $ hence the result obtained for rotations if we no longer remember the number of generators of the orthogonal group.
@@ -962,7 +956,7 @@ $
   corr(A_1 phi_1 (x_1) A_2 phi_2 (x_2) ... A_n phi_n (x_n)) = (A_1 A_2 ... A_n) corr(phi_1 (x_1) phi_2 (x_2) ... phi_n (x_n))
 $
 
-where $A_k$ is a constant or an operator of the positions $x^mu$. The notion of correlation function in the framework of CFT should become clearer as it is used.
+where $A_k$ is a constant and the $phi$'s are functions of the positions $x^mu$. The notion of correlation function in the framework of CFT should become clearer as it is used.
 
 == Scaling dimension of an operator
 In the following, we will need an important concept that is directly related to dilations: the scaling dimension of an operator. The scaling dimension is a number associated with an operator that indicates how the latter behaves under dilation $x -> lambda x$. This notion is related to dimensions in the sense of dimensional analysis. Given any operator $cal(O)(x)$, the invariance under dilation $x -> lambda x$ implies that
@@ -1161,7 +1155,7 @@ $
   <==> space.quad & markrect(T^mu_(space.en mu) = 0, padding: #.25em) space.
 $
 
-In other words, under conformal symmetries, the energy-momentum tensor has zero trace. This is a fact specific to conformal field theories: every CFT has a zero trace energy-momentum tensor! In a conformal field theory, the fact that the energy-momentum tensor has zero trace reflects the invariance of the system under expansions. Concretely, this means that the dynamics of the system does not involve any dimensional parameter that would fi x a particular scale, which is at the heart of conformal invariance.
+In other words, under conformal symmetries, the energy-momentum tensor has zero trace. This is a fact specific to conformal field theories: every CFT has a zero trace energy-momentum tensor! In a conformal field theory, the fact that the energy-momentum tensor has zero trace reflects the invariance of the system under expansions. Concretely, this means that the dynamics of the system does not involve any dimensional parameter that would fix a particular scale, which is at the heart of conformal invariance.
 
 The other symmetry transformations (rotation, dilation and special conformal) can also be associated with a current by a similar procedure, however we will not go into the details of the calculations because this is not very useful for the following and it is a work which is not specific to conformal field theory.
 
@@ -1181,7 +1175,7 @@ For the SCT, to the infinitesimal order, we have $delta x^mu = 2(b dot x) x^mu -
 
 For each of these currents, the form is not unique, in particular it is common to express everything in terms of the manifestly symmetric energy-momentum tensor $T^(mu nu)$ and, therefore, to add corrective terms.
 
-=== The Identity of Ward-Takahashi
+=== The Ward-Takahashi identities
 At the classical level, the invariance of the action under continuous symmetries implies the existence of a conserved current. However, at the quantum level, classical symmetries lead to constraints on the correlation function, known as the Ward Takahashi identities. We will say that the symmetry is "anomalous" if the functional measure in the path integral does not exhibit the symmetry of the action, i.e. $[cal(D) phi'] != [cal(D) phi]$. In the following, we will always assume that this constraint holds. Assume that the classical action is invariant under the general transformation $ phi'(x') = cal(F)(phi(x)) $ and that the symmetry is not anomalous, i.e. $[cal(D) phi'] = [cal(D) phi]$. Then
 
 $
@@ -1277,6 +1271,9 @@ Very generally, Ward identities reflect the constraints imposed by a symmetry (i
 
 
 === Ward-Takahashi identity and conformal symmetries
+Knowing the Noether currents associated with conformal symmetries, it is sufficient to use them in the Ward-Takahashi equation #ref(<ward>) to deduce the conformal Ward identities.
+
+/*
 Let's apply the equation developed in the previous section, #ref(<ward>), to a conformal field theory. We sometimes speak of Ward identities in the plural because the previous formula gives us one for each Noether current. Recall the Noether currents associated with conformal symmetries:
 
 #align(center,
@@ -1293,6 +1290,7 @@ Let's apply the equation developed in the previous section, #ref(<ward>), to a c
 )
 
 Let us now establish Ward identities for each of these symmetries.
+*/
 
 *Symmetry under translation*
 
@@ -1400,7 +1398,7 @@ Conformal symmetries impose constraints on correlation functions. One way to cla
     [$hat(P)_mu = partial_mu$], [Translation],
     [$hat(L)_(mu nu) = x_nu partial_mu - x_mu partial_nu$], [Lorentz],
     [$hat(D) = x^mu partial_mu$], [Dilation],
-    [$hat(K)_mu = 2 x_mu x^nu partial_nu - (x^2) partial_mu)$], [Special compliant],
+    [$hat(K)_mu = 2 x_mu x^nu partial_nu - (x^2) partial_mu$], [Special compliant],
   )
 )
 
@@ -1424,7 +1422,7 @@ $
   ket(Delta) = "state with dimension" Delta.
 $
 
-These states will be created by acting with an operator $hat(O)_Delta(0)$ at the origin, on the vacuum
+These states will be created by acting with an operator $hat(O)_Delta (0)$ at the origin, on the vacuum
 
 $
   hat(O)_Delta (0) ket(0) equiv ket(Delta).
@@ -1467,7 +1465,7 @@ it is often only this relation that is given to define the _primary operators_. 
 
 $
   hat(K)_mu ket(Delta) &= hat(K)_mu hat(cal(O))_Delta (0) ket(0) \
-                       &= hat(cal(O))_Delta (0) hat(K)_mu) ket(0) && space.quad "(commutent)" \
+                       &= hat(cal(O))_Delta (0) hat(K)_mu) ket(0) && space.quad "(commute)" \
                        &= 0
 $
 
@@ -1495,11 +1493,11 @@ We thus see that $ket(psi)$ is indeed an eigenstate of $hat(D)$, with a value $D
 
 $
   hat(cal(O))_Delta &= "primary dimension operator" Delta \
-  hat(P)_mu hat(cal(O))_Delta &= "descending dimension operator" Delta + 1 \
+  hat(P)_mu hat(cal(O))_Delta &= "descendant dimension operator" Delta + 1 \
                                                     &.\
                                                     &.\
                                                     &.\
-  hat(P)_(mu_1) ... hat(P)_(mu_n) hat(cal(O))_Delta &= "descending dimension operator" Delta + n
+  hat(P)_(mu_1) ... hat(P)_(mu_n) hat(cal(O))_Delta &= "descendant dimension operator" Delta + n
 $
 
 Therefore, given a primary operator, it will always be associated with a set (often infinite) of descendant operators, we will say that they form a "family". In other words, given that the primary operators generate the descendants by the action of $hat(P)_mu$, it will never be necessary to specify operators other than the primaries, which will greatly simplify discussions in the future.
@@ -1515,7 +1513,7 @@ $
 $<density>
 #v(1em)
 
-Descending operators do not transform as well, and we will therefore only invoke them implicitly, through the primary operators from which they originate by the action of $hat(P)_mu$. We will not use this formula later; we only take it as a note.
+Descending operators do not transform as well, and we will therefore only invoke them implicitly, through the primary operators from which they originate by the action of $hat(P)_mu$.
 
 
 
@@ -1666,7 +1664,7 @@ $
 The notations may vary depending on convention or usage, but the idea remains the same. In these notations, it may be easier to express the second condition mentioned earlier: we will have a valid OPE iff $abs(x_1 - x_2) << abs(x_1 - x_l)$ for all $l eq.not 2$.
 
 #remark[
-  Knowing that there are an infinite number of descending operators given a primary operator, this sum must be understood as a series expansion.
+  Knowing that there are an infinite number of descendant operators given a primary operator, this sum must be understood as a series expansion.
 ]
 
 It is possible, only by dimensional analysis, to determine the first contribution of the OPE between two scalars. For simplicity, let us take $phi_1(x) phi_2(0)$ where $phi_1$ has a scaling dimension $Delta_1$ and $phi_2$ has a scaling dimension $Delta_2$. Then, it follows that
@@ -1773,9 +1771,9 @@ and from there it is now clear that we have the following OPEs:
 
 #v(0.5em)
 $
-  & markrect(partial_z phi(z, macron(z)) partial_omega phi(omega, macron(omega)) ~ frac(1, 4 pi g) frac(1, (z - omega)^2), padding: #.5em) \
+  & markrect(partial_z phi(z, macron(z)) partial_omega phi(omega, macron(omega)) ~ frac(1, 4 pi g) frac(1, (z - omega)^2) + ..., padding: #.5em) \
   #v(4.5em)
-  & markrect(partial_(macron(z)) phi(z, macron(z)) partial_(macron(omega)) phi(omega, macron(omega)) ~ frac(1, 4 pi g) frac(1, (macron(z) - macron(omega))^2), padding: #.5em)
+  & markrect(partial_(macron(z)) phi(z, macron(z)) partial_(macron(omega)) phi(omega, macron(omega)) ~ frac(1, 4 pi g) frac(1, (macron(z) - macron(omega))^2) + ..., padding: #.5em)
 $<bo2>
 #v(0.5em)
 
@@ -1798,7 +1796,7 @@ $
   The "quantum version" of this energy-momentum tensor is usually presented with normal order and Wick's theorem, but this is beyond the scope of this paper and we will just stick to the results without going too deep, the goal is to see what the OPE looks like on concrete cases after all.
 ]
 
-We can therefore show that after quantification,
+We can therefore show that after quantization,
 
 $
   T(z, macron(z)) &= - 2 pi g :partial phi partial phi: \
@@ -1839,7 +1837,7 @@ which ultimately gives us the following OPE:
 #v(0.5em)
 $
   markrect(padding: #.5em,
-    T(z) partial phi(omega, macron(omega)) ~ frac(partial phi(omega, macron(omega)), (z - omega)^2) + frac(partial^2 phi(omega, macron(omega)), (z - w))
+    T(z) partial phi(omega, macron(omega)) ~ frac(partial phi(omega, macron(omega)), (z - omega)^2) + frac(partial^2 phi(omega, macron(omega)), (z - w)) + ...
   )
 $
 #v(0.5em)
@@ -1851,7 +1849,7 @@ A similar derivation to the previous one can be done to calculate $T(z) T(omega)
 #v(0.5em)
 $
   markrect(padding: #.5em,
-    T(z) T(omega) ~ frac(1\/2, (z - omega)^4) + frac(2 T(omega), (z - omega)^2) + frac(partial T(omega), (z - omega))
+    T(z) T(omega) ~ frac(1\/2, (z - omega)^4) + frac(2 T(omega), (z - omega)^2) + frac(partial T(omega), (z - omega)) + ...
   )
 $<bo3>
 #v(0.5em)
@@ -1980,7 +1978,7 @@ $
 where, as announced, we thus get rid of the $L^A_(space.en B)$ which adds nothing to the discussion.
 
 === One-point scalar correlation functions
-Let's apply the #ref(<indp>) constraint to the scalar correlation function at a point,
+Let's apply the #ref(<indp>) constraint to the one-point scalar correlation function,
 
 $
   corr(cal(O)_Delta (tilde(x)^mu)) overset(=, !) corr(tilde(cal(O))_Delta (tilde(x)^mu))
@@ -2038,7 +2036,7 @@ $
   space C = lambda^(-Delta) C.
 $
 
-This equation _must_ hold for any dilation factor $lambda$, which is true if $Delta = 0$ or if $C = 0$. Since the case $Delta = 0$ corresponds to a zero-dimensional operator, it can only be a constant and is therefore uninteresting. From this, we can conclude that all correlation functions at one point must vanish:
+This equation _must_ hold for any dilation factor $lambda$, which is true if $Delta = 0$ or if $C = 0$. Since the case $Delta = 0$ corresponds to a zero-dimensional operator, it can only be a constant and is therefore uninteresting. From this, we can conclude that all point correlation functions must vanish:
 
 #v(0.5em)
 $
@@ -2171,7 +2169,7 @@ $<dil1>
 
 where $C$ is the constant of the power development associated with $k = -(Delta_1 + Delta_2)$.
 
-*Special transformation compliant*
+*Special conformal transformation*
 
 We come to the last symmetry transformation with which the two-point scalar correlation function will be constrained. Recall that $tilde(x)^mu = x^mu + 2(x dot b)x^mu - b^mu x^2$, we could calculate the Jacobian and try to get by as best we can, but in fact it is simpler to remember that the special conformal transformation is composed of an inversion, then a translation, then an inversion and since we already know the result of the symmetry under translation, it is enough to tackle the "subsymmetry" under inversion. As was presented earlier, the inversion considered is given by
 
@@ -2312,7 +2310,7 @@ $
 
 because, in fact, the condition #ref(<jsp3>) can be verified for several terms a priori.
 
-*Special transformation compliant*
+*Special conformal transformation*
 
 As before, we only need to impose the transformation under inversion. In the case of the two-point scalar correlation function, we arrived at the constraint that "$Delta_1 = Delta_2$". Here, since there are three points, we will have three constraints on the $i, j, k$ whose result we give directly and without development (it is a long calculation and without much interest):
 
@@ -2342,7 +2340,7 @@ We have thus shown that the one-, two- and three-point scalar correlation functi
     #math.equation(block: true, numbering: none)[$
       corr(cal(O)_Delta (x^mu)) &= 0 && "(1 point)" \
       corr(cal(O)_(Delta_1)(x_1^mu) cal(O)_(Delta_2)(x_2^mu)) &= frac(C delta_(Delta_1 Delta_2), abs(x_1^mu - x_2^mu)^(Delta_1 + Delta_2)) && "(2 points)" \
-      corr(cal(O)_(Delta_1) (x^mu_1) cal(O)_(Delta_2) (x^mu_2) cal(O)_(Delta_3) (x^mu_3)) &= frac(C_(123), abs(x^mu_(12))^i abs(x_(23)^mu)^j abs(x_(31)^mu)^k) space.quad && "(3 dots)" \
+      corr(cal(O)_(Delta_1) (x^mu_1) cal(O)_(Delta_2) (x^mu_2) cal(O)_(Delta_3) (x^mu_3)) &= frac(C_(123), abs(x^mu_(12))^i abs(x_(23)^mu)^j abs(x_(31)^mu)^k) space.quad && "(3 points)" \
     $]
     #v(0.5em)
   ]
@@ -2412,7 +2410,7 @@ $
   [I(x_i) - I(x_j)]^2 = frac((x_j^2 x_i - x_i^2 x_j)^2, x_i^4 x_j^4).
 $
 
-Gold,
+Hence,
 
 $
   (x_j^2 x_i - x_i^2 x_j)^2 = x_i^2 x_j^2 (x_i - x_j)^2 equiv x_i^2 x_j^2 x_(i j)^2,
@@ -2461,7 +2459,7 @@ where, as announced, it is no longer entirely determined by a set of constants b
 
 */
 
-Since we are somewhat "stuck" with scalar correlation functions at $n >= 4$ points, we will have to resort to an approximation to move forward, but it turns out that we already know it: the Operator Product Expansion (OPE). The OPE allows us to obtain an $n-1$ point correlation function from an $n$ point correlation function, and since we have seen that the one-, two-, and three-point correlation functions are entirely determined up to a set of constants, it will be enough to perform the OPE repeatedly until we reach one of these fi xed forms, which, as a reminder, will also produce another set of constants, and it is the set of these constants together that is best called "CFT data". It is all these constraints brought by the CFT that will give rise to the bootstrap algorithm, as we will see a little later.
+Since we are somewhat "stuck" with scalar correlation functions at $n >= 4$ points, we will have to resort to an approximation to move forward, but it turns out that we already know it: the Operator Product Expansion (OPE). The OPE allows us to obtain an $n-1$ point correlation function from an $n$ point correlation function, and since we have seen that the one-, two-, and three-point correlation functions are entirely determined up to a set of constants, it will be enough to perform the OPE repeatedly until we reach one of these fixed forms, which, as a reminder, will also produce another set of constants, and it is the set of these constants together that is best called "CFT data". It is all these constraints brought by the CFT that will give rise to the bootstrap algorithm, as we will see a little later.
 
 Consider a four-point scalar correlation function that is developed by two successive OPEs, which can be written in all generality as
 

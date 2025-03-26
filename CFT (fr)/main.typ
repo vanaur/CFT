@@ -76,7 +76,7 @@
   title: [Conformal Field Theory],
   author: "Aurélien Vandeweyer",
   date: datetime(year: 2025, month: 02, day: 13),
-  abstract: [Ce rapport de stage consiste à la présentation du sujet de la théorie conforme des champs, sujet qui a été étudié durant le stage de première année de master à l'université de Mons, dans le département de Physique de l'Univers, Champs et Gravitation, supervisé par Evgeny Skvortsov. Le sujet est présenté d'une façon, je l'espère, pédagogique tel que j'aurais pu apprécier l'apprendre.],
+  abstract: [Ce rapport de stage consiste en la présentation du sujet de la théorie conforme des champs, sujet qui a été étudié durant le stage de première année de master à l'université de Mons, dans le département de Physique de l'Univers, Champs et Gravitation, supervisé par Evgeny Skvortsov. Le sujet est présenté d'une façon, je l'espère, pédagogique telle que j'aurais pu apprécier l'apprendre.],
   figure-index: (enabled: false),
   table-index: (enabled: false),
   listing-index: (enabled: false)
@@ -84,17 +84,15 @@
 
 // -- Content of the document --
 
-= Introduction et remerciments
-Ce rapport de stage présente les connaissances acquises lors de mon stage de première année de Master de physique à l’UMons. L’objectif était de découvrir un nouveau domaine en physique, à savoir la théorie conforme des champs, avec un accent particulier sur les transitions de phase dans la finalité. Puisque le sujet était entièrement nouveau pour moi, ce document a été rédigé sous une forme pédagogique afin de synthétiser l’ensemble des apprentissages réalisés durant le stage. Les grands points couvert sont
+= Introduction et remerciements
+Ce rapport de stage présente les connaissances acquises lors de mon stage de première année de Master de physique à l’UMons. L’objectif était de découvrir un nouveau domaine en physique, à savoir la théorie conforme des champs, avec un accent particulier sur les transitions de phase dans la finalité. Puisque le sujet était entièrement nouveau pour moi, ce document a été rédigé sous une forme pédagogique afin de synthétiser l’ensemble des apprentissages réalisés durant le stage. Les grands points couverts sont
 
  1. Première approche sur les transitions de phase ;
  2. Introduction à l'approche du groupe de renormalisation ;
  3. Étude des symétries conformes et leur application aux fonctions de corrélation ;
  4. L'_Operator Product Expansion_ et l'introduction à l'approche du bootstrap.
 
-De nombreuses sources ont été utilisées pour étudier le sujet, elles sont reprises en fin de document. Le document en lui-même est majoritairement originale dans le sens où il s'agit d'expliquer ce qui a été appris de façon personnelle.
-
-Je tiens à remercier M. Skvortsov pour son encadrement, ses explications et sa disponibilité !
+De nombreuses sources ont été utilisées pour étudier le sujet, elles sont reprises à la fin. Je tiens à remercier M. Skvortsov pour son encadrement, ses explications et sa disponibilité !
 
 #linebreak()
 
@@ -109,11 +107,11 @@ Je suis conscient que ce rapport de stage présente un nombre de page qui pourra
 */
 
 == Faits généraux sur les transitions de phase
-Les transitions de phase représentent des changements importants dans l’état d’un système, qui se traduisent par une modification qualitative de ses propriétés macroscopiques. Ces phénomènes, que l’on rencontre dans divers domaines allant de la physique des solides à la thermodynamique des fluides, offrent un terrain d’étude plutôt large et, même si étudié depuis longtemps, présentent encore un certain nombre de questions de grand intérêt pour la science, en particulier lorsqu’on s’intéresse aux points critiques et aux phénomènes d’universalité.
+Les transitions de phase représentent des changements importants dans l’état d’un système, qui se traduisent par une modification qualitative de ses propriétés macroscopiques. Ces phénomènes, que l’on rencontre dans divers domaines allant de la physique des solides à la thermodynamique des fluides, offrent un terrain d’étude plutôt large et, même si étudié depuis longtemps, présentent encore un certain nombre de questions d'intérêt pour la science, en particulier lorsqu’on s’intéresse aux points critiques et aux phénomènes d’universalité.
 
 À l’approche d’un point critique, le système affiche des comportements singuliers : certaines quantités, comme la longueur de corrélation ou la susceptibilité, divergent ou présentent des variations non analytiques. Par exemple, dans une transition continue (ou du second ordre), la divergence de la longueur de corrélation implique que le système devient _scale invariant_ : aucune longueur ou ordre de grandeur caractéristique ne domine, et les fluctuations locales se propagent à toutes les échelles. Ces "absence d’échelle" conduisent à des lois de puissance décrivant le comportement près du point critique, et dont les coefficients – les exposants critiques – se révèlent être identiques pour des systèmes très différents.
 
-Ce phénomène d’universalité signifie que des systèmes physiquement distincts, possédant des symétries et dimensions identiques, partagent les mêmes exposants critiques et fonctions de corrélation. Par exemple, un liquide en équilibre près de son point critique et un aimant proche de sa température de Curie présentent des comportements similaires à grande échelle, malgré leurs différences microscopiques. Cette propriété a grandement contribué à la compréhension de la physique statistique (et de la théorie (quantique) des champs !), en permettant de regrouper les systèmes en classes d’universalité qui dépendent principalement de quelques paramètres essentiels (la dimension spatiale, la symétrie du paramètre d’ordre, etc.) plutôt que des détails microscopiques du système.
+Ce phénomène d’universalité signifie que des systèmes physiquement distincts, possédant des symétries et dimensions identiques, partagent les mêmes exposants critiques et fonctions de corrélation. Par exemple, un liquide en équilibre près de son point critique et un aimant proche de sa température de Curie présentent des comportements similaires à grande échelle, malgré leurs différences microscopiques. Cette propriété a grandement contribué à la compréhension de la physique statistique (et de la théorie (quantique) des champs), en permettant de regrouper les systèmes en classes d’universalité qui dépendent principalement de quelques paramètres essentiels (la dimension spatiale, la symétrie du paramètre d’ordre, etc.) plutôt que des détails microscopiques du système.
 
 L’explication théorique de cette universalité est encore un sujet de recherche, traditionnellement passant par l’approche du groupe de renormalisation, qui permet d’étudier comment les interactions à différentes échelles s’agrègent, des méthodes numériques ou analytiques plus modernes ont vue le jour pour essayer d'en apprendre plus sur les exposants critiques, comme l'approche par théorie des champs conforme par le "bootstrap", comme cela sera abordé.
 
@@ -134,7 +132,7 @@ Avant d'aller plus loin, précisons que le "groupe" de renormalisation n'a rien 
 Nous allons introduire le concept au travers de divers exemples, discrets et continus.
 
 == Chaîne de spins de Ising en 1D
-Considérons une chaîne unidimensionnelle composée de $N$ spins avec une constante de couplage $J$ entre chaque voisin.
+Considérons une chaîne unidimensionnelle composée de $N$ spins avec une constante de couplage $0 <= J <= 1$ entre chaque voisin.
 
 #v(1em)
 #figure(
@@ -147,7 +145,7 @@ Considérons une chaîne unidimensionnelle composée de $N$ spins avec une const
 )
 #v(1em)
 
-Le Hamiltonien associé est $ H = -sum_i J sigma_i sigma_(i + 1). $ Plutôt que de conserver tout les $N$ spins, nous pourrions, par exemple, uniquement considérer la moitié de ces spins sur la chaîne et (pour un large $N$) toujours avoir une description du système raisonnablement précise en décrivant les spins restant en terme d'une nouvelle constante de couplage, $J'$, qui tient compte du fait que nous avons retirer une partie des spins. On parlera de "décimation" : en générale nous allons sommer (ou intégrer) une certaine fraction de spins à chaque étape, laissant derrière nous un système avec moins de spins qu'au départ mais compensé avec une constante de couplage "mise à jour" :
+Le Hamiltonien associé est $ H = -sum_i J sigma_i sigma_(i + 1). $ Plutôt que de conserver tous les $N$ spins, nous pourrions, par exemple, uniquement considérer la moitié de ces spins sur la chaîne et (pour un large $N$) toujours avoir une description du système raisonnablement précise en décrivant les spins restants en terme d'une nouvelle constante de couplage, $J'$, qui tient compte du fait que nous avons retiré une partie des spins. On parlera de "décimation" : en général nous allons sommer (ou intégrer) une certaine fraction de spins à chaque étape, laissant derrière nous un système avec moins de spins qu'au départ mais compensé avec une constante de couplage "mise à jour" :
 
 #v(1em)
 #figure(
@@ -187,7 +185,7 @@ Le Hamiltonien associé est $ H = -sum_i J sigma_i sigma_(i + 1). $ Plutôt que 
 
 Et ainsi de suite...
 
-Soyons plus concret et utilisons une chaîne de spin à une température non-nulle, avec le Hamiltonien d'origine, la fonction de partition prend donc la forme suivante :
+Soyons plus concret et utilisons une chaîne de spins à une température non-nulle, avec le Hamiltonien d'origine, la fonction de partition prend donc la forme suivante :
 
 $
   z = sum_(markul({sigma_i = plus.minus 1}, padding: #.15em, tag: #<µetat>, color: #red)) e^(-beta H) = sum_({sigma_i = plus.minus 1}) exp(beta J sum_i sigma_i sigma_(i + 1)).
@@ -196,7 +194,7 @@ $
 $
 #v(1.5em)
 
-Le but est de prendre la somme sur la moitié des spins du système. Pour se faire, on peut simplement considérer sauter un spin sur deux, comme cela a été suggéré plus haut (ce qui pourrait se faire mathématiquement en associant un numéro à chaque spin et en sommant par exemple uniquement sur les spins de numéro impaire). La fonction de partition _attendue_ doit donc être de la forme suivante :
+Le but est de prendre la somme sur la moitié des spins du système. Pour ce faire, on peut simplement considérer sauter un spin sur deux, comme cela a été suggéré plus haut (ce qui pourrait se faire mathématiquement en associant un numéro à chaque spin et en sommant par exemple uniquement sur les spins de numéro impaire). La fonction de partition _attendue_ doit donc être de la forme suivante :
 
 $
   z = sum_({sigma_i = plus.minus 1}) exp(beta J' sum_(2i) sigma_(2i) sigma_(2(i + 1))).
@@ -206,7 +204,7 @@ En effet il s'agit simplement de la fonction de partition de départ, mais où l
 
 $
   z &= sum_({sigma_i = plus.minus 1})^(i = 0, 2) sum_({sigma_1}) exp(beta J (sigma_0 sigma_1 + sigma_1 sigma_2)) \
-    &= sum_({sigma_i = plus.minus 1})^(i = 0, 2) [ e^(beta J (sigma_0 + sigma_2)) + e^(-beta J (sigma_0 sigma_2)) ] \
+    &= sum_({sigma_i = plus.minus 1})^(i = 0, 2) [ e^(beta J (sigma_0 + sigma_2)) + e^(-beta J (sigma_0 + sigma_2)) ] \
     &= sum_({sigma_i = plus.minus 1})^(i = 0, 2) 2 cosh[beta J (sigma_0 + sigma_2)].
 $ <z1>
 
@@ -244,7 +242,7 @@ $
 
 Nous avons donc obtenu une expression pour la constante de couplage mise à échelle, $J'$, qui décrit physiquement les interactions entre les spins restants après une étape de décimation. Dès lors, pour un $J$ initial donné (qui correspond au système encore non re-normalisé), nous avons une relation récursive que nous pouvons appliquer un certain nombre de fois et qui correspondra, par construction, à cette procédure de renormalisation où, à chaque étape, nous dézoomons un peu plus et nous nous débarrassons des détails microscopiques du système !
 
-Que se passe-t-il lorsqu'on itère suffisamment de fois ? Supposons que le système initial est tel que $J = 1$ et que la température, constante, est élevée (c'est-à-dire que $beta$ est très petit). Alors, $ cosh(x) = 1 + x^2/2! + x^4/4! + cal(O)(x^6) $ ce qui, dans notre cas, nous donne $ cosh(2 beta J) approx 1 + 2 (beta J)^2. $ Ensuite, $ log[cosh(2 beta J)] approx log(1 + 2 (beta J)^2) approx 2 (beta J)^2 $ où on a utilisé $log(1 + x) approx x$ pour $x$ suffisamment petit. Nous substituons ce résultat dans notre formule pour $J'$ et trouvons alors la nouvelle relation $ J' = 1/(2 beta) log[cosh(2 beta J)] approx 1/(2 beta) [2 (beta J)^2] = beta J^2. $ Donc, quand la température est suffisamment élevée, et donc que $beta$ est suffisamment petit, on obtient un nouveau couplage $J' approx beta J^2$ qui est _plus petit_ que $J$ (rappelons que $0 < J <= 1$ et que $beta < 1$). Autrement dit, plus on "dézoome" plus la constante de couplage tend vers zéro, nous pouvons en conclure que $J$ est une variable inutile à la description des propriétés à grande échelle du système ! Nous pouvons aussi implémenter numériquement la fonction récursive précédente, après quelques itérations on obtient le tableau suivant :
+Que se passe-t-il lorsqu'on itère suffisamment de fois ? Supposons que le système initial est tel que la température est élevée (c'est-à-dire que $beta$ est très petit). Alors, $ cosh(x) = 1 + x^2/2! + x^4/4! + cal(O)(x^6) $ ce qui, dans notre cas, nous donne $ cosh(2 beta J) approx 1 + 2 (beta J)^2. $ Ensuite, $ log[cosh(2 beta J)] approx log(1 + 2 (beta J)^2) approx 2 (beta J)^2 $ où on a utilisé $log(1 + x) approx x$ pour $x$ suffisamment petit. Nous substituons ce résultat dans notre formule pour $J'$ et trouvons alors la nouvelle relation $ J' = 1/(2 beta) log[cosh(2 beta J)] approx 1/(2 beta) [2 (beta J)^2] = beta J^2. $ Donc, quand la température est suffisamment élevée, et donc que $beta$ est suffisamment petit, on obtient un nouveau couplage $J' approx beta J^2$ qui est _plus petit_ que $J$ (rappelons que $0 < J <= 1$ et que $beta << 1$). Autrement dit, plus on "dézoome" plus la constante de couplage tend vers zéro, nous pouvons en conclure que $J$ est une variable inutile à la description des propriétés à grande échelle du système ! Nous pouvons aussi implémenter numériquement la fonction récursive précédente, après quelques itérations on obtient le tableau, par exemple, suivant :
 
 #align(center)[
   #table(
@@ -270,7 +268,7 @@ $
   H = -sum_(angle.l i, j angle.r) J sigma^x_i sigma^x_j - sum_i h sigma^z_i
 $
 
-Nous allons appliquer la méthode du RG avec, cette fois-ci, une forme de décimation similaire mais qui capture mieux la physique du système et qui est plus simple à mettre en place étant donné la situation. Au lieu de compter la contribution d'un spin sur deux, nous allons compter la contribution de paires de spins, autrement dit nous formons un "gros spin" à partir de deux spins voisins et choisissons d'attribuer à ce dernier la plus faible énergie des deux spins composites afin de conserver l'aspect d'un système à faible énergie (si l'on faisait l'inverse, à chaque étape de la décimation, le système gagnerait potentiellement en énergie, ce qui n'est pas représentatif du système). Cette méthode de décimation porte le nom de "blocs de spins". Nous n'allons pas donner la dérivation de la formule récursive mais uniquement donné le résultat final, qui se compose en fait d'une relation pour la constante de couplage et d'une relation pour le champs magnétique externe :
+Nous allons appliquer la méthode du RG avec, cette fois-ci, une forme de décimation similaire mais qui capture mieux la physique du système et qui est plus simple à mettre en place étant donné la situation. Au lieu de compter la contribution d'un spin sur deux, nous allons compter la contribution de paires de spins, autrement dit nous formons un "gros spin" à partir de deux spins voisins et choisissons d'attribuer à ce dernier la plus faible énergie des deux spins composites afin de conserver l'aspect d'un système à faible énergie (si l'on faisait l'inverse, à chaque étape de la décimation, le système gagnerait potentiellement en énergie, ce qui n'est pas représentatif d'un système à faible énergie au départ). Cette méthode de décimation porte le nom de "blocs de spins". Nous n'allons pas donner la dérivation de la formule récursive mais uniquement donner le résultat final, qui se compose en fait d'une relation pour la constante de couplage et d'une relation pour le champs magnétique externe :
 
 $
   & J' = frac(J^2, sqrt(J^2 + h^2)), \
@@ -281,9 +279,9 @@ Nous pouvons exprimer le ratio $h\/J$ et étudier numériquement ce qu'il se pas
 
  - Pour un ratio initial $h\/J > 1$, après itérations, le ratio diverge et devient infini. Cela nous apprend que $J$ est une variable moins relevante que $h$. Physiquement, le matériau se trouve dans une phase paramagnétique ;
  - Pour un ratio initial $h\/J < 1$, on trouve que le ratio converge vers zéro, ce qui indique que $J$ est une variable plus relevant que $h$. Le matériau est dans une phase ferromagnétique.
- - Pour un ratio initial $h\/J = 1$, on constante que le ratio n'évolue pas et reste à $1$.
+ - Pour un ratio initial $h\/J = 1$, on constate que le ratio n'évolue pas et reste à $1$.
 
-Autrement dit, cela signifie que le système présente une transition de phase ! Le fait qu'un paramètre du groupe de renormalisation (ici, le ratio $h\/J$) reste constant tout au long de la procédure reflète l'invariance sous changement d'échelle du système proche d'un point critique, et nous remarquons de plus qu'il existe deux tendances distinctes de ce paramètre "avant" et "après" ce point critique, ce qui illustre bien l'existence de différentes phases pour ce système en particulier.
+Autrement dit, cela signifie que le système présente une transition de phase ! Le fait qu'un paramètre du groupe de renormalisation (ici, le ratio $h\/J$) reste constant tout au long de la procédure reflète l'invariance sous changement d'échelle du système proche d'un point critique, et nous remarquons de plus qu'il existe deux tendances distinctes de ce paramètre "avant" et "après" ce point critique, ce qui illustre bien l'existence de différentes phases pour ce système en particulier. En réalité, une analyse un peu plus fine est nécessaire pour réellement conclure à la possibilité d'une transition de phase en fonction de la stabilité du système (nous verrons un exemple plus tard), mais cette première approche par groupe de renormalisation met tout de même le doigt sur un phénomène possiblement transitoire.
 
 == Modèle de Ising en 2D (idée)
 Comment appliquer le groupe de renormalisation dans un modèle en 2d, plus réaliste ? L'idée ne change pas : on veut trouver un moyen de "dézoomer". Nous n'allons ici entrer dans aucun détail, mais seulement illustrer qu'un choix mal avisé de décimation conduit à changer la géométrie du système physique, ce que l'on veut éviter.
@@ -340,7 +338,7 @@ Si nous appliquons la même méthode de décimation que pour la chaîne unidimen
     . X . O . X . O . X . O . X . O . X .
     . . . . . . . . . . . . . . . . . . .
   "),
-  caption: [Configuration où l'on retire un spin sur deux : on se retrouve avec des chaînes et les couplages entre les spins ne sont plus très claires]
+  caption: [Configuration où l'on retire un spin sur deux : on se retrouve avec des chaînes et les couplages entre les spins ne sont plus très clairs]
 )
 #v(1em)
 
@@ -374,12 +372,12 @@ Nous pourrions essayer une variante de cette méthode de décimation, où on enl
 )
 #v(1em)
 
-Cette configuration semble préserver la géométrie du système ! Cependant, un œil attentif se rendra compte que cette configuration revient à effectuer une rotation du système initiale où chaque spin est distant d'un facteur $r -> sqrt(2) r$, autrement dit, cette méthode de décimation change encore une fois la géométrie du réseau de spins.
+Cette configuration semble préserver la géométrie du système ! Cependant, un œil attentif se rendra compte que cette configuration revient à effectuer une rotation du système initiale où chaque spin est distant d'un facteur $r -> sqrt(2) r$ et où l'on retire un spin sur deux; autrement dit, cette méthode de décimation change encore une fois la géométrie du réseau de spins.
 
 La conclusion à cela est la suivante : choisir une méthode de décimation en $d >= 2$ doit se faire avec soin afin de ne pas altérer la géométrie du réseau.
 
 == Groupe de renormalisation pour un système continu -- méthode de Wilson
-Jusqu'à présent, nous avons présenté les idées du groupe de renormalisation (et avons complètement déterminé l'équation pour le cas le plus simple) dans des systèmes en réseaux, discrets. Nous allons maintenant nous intéressé au cas continu. La méthode est essentiellement la même qu'avant, mais à la place de se mettre dans un espace réel on démarre avec un espace d'impulsions (c'est la procédure de renormalisation de _Wilson_). Cette façon de procéder requière une description en champs du système, en particulier la fonction de partition s'exprime
+Jusqu'à présent, nous avons présenté les idées du groupe de renormalisation (et avons complètement déterminé l'équation pour le cas le plus simple) dans des systèmes en réseaux, discrets. Nous allons maintenant nous intéresser au cas continu. La méthode est essentiellement la même qu'avant, mais à la place de se mettre dans un espace réel on démarre avec un espace d'impulsions (c'est la procédure de renormalisation de _Wilson_). Cette façon de procéder requière une description en champs du système, en particulier la fonction de partition s'exprime
 
 $
   z = alpha integral [cal(D) phi] space e^(-S[phi])
@@ -418,7 +416,7 @@ $
   S[phi_<, phi_>] = S_0[phi_<] + S_1[phi_>] + delta S[phi_<, phi_>]
 $
 
-où le dernier terme correspond aux modes mixtes (qui dépendant à la fois des modes faibles et des modes rapides). La procédure de Wilson peut être visualisée comme suit : on commence avec un système sans aucune altération, ensuite, on retire les modes à haute fréquence, puis enfin on "dézoome" en remettant à l'échelle les impulsions, comme illustré très schématiquement avec l'image de l'écureuil ci-dessous :
+où le dernier terme correspond aux modes mixtes (dépendant à la fois des modes faibles et des modes rapides). La procédure de Wilson peut être visualisée comme suit : on commence avec un système sans aucune altération, ensuite, on retire les modes à haute fréquence, puis enfin on "dézoome" en remettant à l'échelle les impulsions, comme illustré très schématiquement avec l'image de l'écureuil ci-dessous :
 
 #align(center)[
   #table(
@@ -440,12 +438,12 @@ $
   S[phi] = 1/2 integral_(abs(k) < Lambda) dd^d k space (k^2 + r) abs(phi(k))^2
 $
 
-où $r$ est le terme de masse et $Lambda$ borne la région de l'espace $k$ intégrée. En terme physiques, cette action peut être vue comme l’approximation quadratique d’un modèle de Ginzburg-Landau pour une transition de phase, mais on la retrouve aussi dans d'autres modèles. On commence par séparer $phi(k)$ en "modes lents" $phi_<$ et en "modes rapides" $phi_>$, plus spécifiquement,
+où $r$ est le terme de masse et $Lambda$ borne la région de l'espace $k$ intégré. En terme physique, cette action peut être vue comme l’approximation quadratique d’un modèle de Ginzburg-Landau pour une transition de phase, mais on la retrouve aussi dans d'autres modèles. On commence par séparer $phi(k)$ en "modes lents" $phi_<$ et en "modes rapides" $phi_>$, plus spécifiquement,
 
  - les *modes lents* $phi_<$ sont tels que $abs(k) < Lambda\/b$ ;
  - les *modes rapides* $phi_>$ sont tels que $Lambda\/b < abs(k) < Lambda$
 
-où $b$ est un facteur de mise à l'échelle (nous y reviendrons après). Nous pouvons alors exprimer le champs $phi$ comme une fonction définie par morceaux, 
+où $b$ est un facteur de mise à l'échelle (nous y reviendrons après). Nous pouvons alors exprimer le champ $phi$ comme une fonction définie par morceaux, 
 
 $
   phi(k) =
@@ -467,16 +465,16 @@ $
 où nous avons donc "éliminé" les modes rapides.
 
 #remark[
-  En réalité, bien que le résultat soit le même (à une constante près), simplement "barrer" le second terme n'est pas très rigoureux. Lorsque l'on considère la fonction de partition, $ z = integral [cal(D) phi] space e^(-S[phi]), $ l'intégrale sur $phi_>$ est une gaussienne indépendante de $phi_<$ et se factorise en produisant simplement une constante multiplicative (un facteur $exp(-1\/2 tr(k^2 + r))$ pour être précis), mais afin de ne pas entrer dans des détails de calculs nous empruntons un chemin plus court.
+  En réalité, bien que le résultat soit le même (à une constante près), simplement "barrer" le second terme n'est pas très rigoureux. Lorsque l'on considère la fonction de partition, $ z = integral [cal(D) phi] space e^(-S[phi]), $ l'intégrale sur $phi_>$ est une gaussienne indépendante de $phi_<$ et se factorise en produisant simplement une constante multiplicative (un facteur $exp(-1\/2 tr(k^2 + r))$ pour être précis), mais afin de ne pas entrer dans des détails de calculs nous empruntons un chemin plus court. Nous rendons donc implicite la constante issue de ce processus.
 ]
 
-En se souvenant de l'image de l'écureuil, nous voulons revenir à une action qui reprend une forme similaire à l'originale. Pour s'en sortir, et cela introduit naturellement un _rescaling_, on pose $tilde(k) := b k$ et donc la borne $abs(k) < Lambda\/b$ devient $abs(tilde(k)) < Lambda$. Le mode lent $phi_<$ doit également être rescale pour "regagner en résolution" (comme la troisième image de l'écureuil), on doit donc poser un $tilde(phi)$ de la forme suivante :
+En nous souvenant de l'image de l'écureuil, nous voulons revenir à une action qui reprend une forme similaire à l'originale. Pour s'en sortir, et cela introduit naturellement un _rescaling_, on pose $tilde(k) := b k$ et donc la borne $abs(k) < Lambda\/b$ devient $abs(tilde(k)) < Lambda$. Le mode lent $phi_<$ doit également être rescale pour "regagner en résolution" (comme la troisième image de l'écureuil), on doit donc poser un $tilde(phi)$ de la forme suivante :
 
 $
   tilde(phi)(tilde(k)) := b^(-Delta) phi_<(k = tilde(k)\/b)
 $<z2>
 
-où $Delta := (d - 2)\/2$ est un terme introduit pour des raisons de dimensionnalités (selon la convention on prend un signe différent devant $Delta$). Maintenant, l'action effective se réécrit
+où $Delta := (d - 2)\/2$ est un terme introduit pour des raisons de dimensionnalité (selon la convention on prend un signe différent devant $Delta$). Maintenant, l'action effective se réécrit
 
 $
   S_"eff"[phi_<] &= integral_(abs(tilde(k)) < Lambda) (b^(-d) dd^d tilde(k)) space (frac(tilde(k)^2, b^2) + r) abs(phi_<(tilde(k) \/ b))^2 \
@@ -488,7 +486,7 @@ $
 
 où on passe de la première à la seconde ligne en factorisant $b$, de la seconde à la troisième en introduisant #ref(<z2>) et où, à la dernière ligne, $ -d + 2 + 2 Delta = -d + 2 + cancel(2)((d - 2)/cancel(2)) = 0, $ et où nous avons posé $ r' := b^2 r. $<r> Nous avons donc effectivement réécrit $S_"eff"$ sous la même forme que l'action d'origine. Récapitulons ce que nous avons fait :
 
- 1. Nous sommes parti d'une action pour le champs $phi$ ;
+ 1. Nous sommes parti d'une action pour le champ $phi$ ;
  2. Nous avons décomposé $phi$ selon des "modes lents" et des "modes rapides" ;
  3. Nous nous sommes débarrassé des modes rapides ;
  4. Nous sommes revenu à une action ayant la même forme qu'à l'origine en "dézoomant".
@@ -520,7 +518,7 @@ Cette équation, comme pour les cas discrets, nous indique comment le terme de m
   caption: [Graphe du flux de l'équation dérivée par la procédure de renormalisation de Wilson]
 )<flux>
 
-Analytiquement (mais on le voit aussi sur le graphe #ref(<flux>)), si $r_"initial" > 0$ alors $r(l) -> infinity$, si $r_"initial" < 0$ alors $r(l) -> -infinity$ et si $r_"initial" = 0$ alors c'est un point fixe, mais instable (la moindre perturbation fait diverger $r(l)$), ce qui n'indique pas l'existence de transition de phase (les fluctuations aléatoires du systèmes ne permettraient pas au point fixe de rester fixe et le ferraient diverger). Dans une théorie avec interaction (typiquement $phi^4$) alors la procédure nous amènerait effectivement un point fixe stable, signe d'une transition de phase.
+Analytiquement (mais on le voit aussi sur le graphe #ref(<flux>)), si $r_"initial" > 0$ alors $r(l) -> infinity$, si $r_"initial" < 0$ alors $r(l) -> -infinity$ et si $r_"initial" = 0$ alors c'est un point fixe, mais instable (la moindre perturbation fait diverger $r(l)$), ce qui n'indique pas l'existence de transition de phase (les fluctuations aléatoires du systèmes ne permettraient pas au point fixe de rester fixe et le feraient diverger). Dans une théorie avec interaction (typiquement $phi^4$) alors la procédure nous amènerait effectivement un point fixe stable, signe d'une transition de phase.
 
 #line()
 #v(1.5em)
@@ -544,9 +542,9 @@ Comme nous l'avons mentionné et vu plus tôt, il semble que les symétries sous
   Les symétries conforment incluent la symétrie sous dilatation : l'invariance conforme implique l'invariance d'échelle, mais l'inverse n'est pas vrai en général.
 ]
 
-Notons également un élément important : l'étude d'une théorie conforme est différente selon la dimension de la théorie, en particulier il est commode de distinguer le cas en dimension $d = 2$ du cas plus général $d >= 3$, en effet, comme nous allons le voir, une théorie conforme en deux dimension (comme la théorie des cordes) possède une algèbre de dimension infinie, tandis que, comme nous le verrons, une CFT en $d >= 3$ présente une algèbre de dimension finie. Il s'en suit que l'étude des théories conformes en $d >= 3$ dimensions est plus simple et c'est celles-ci qui nous intéresserons dans la suite. Il existe également des CFT unidimensionnelles, mais nous ne ferrons que les mentionner.
+Notons également un élément important : l'étude d'une théorie conforme est différente selon la dimension de la théorie, en particulier il est commode de distinguer le cas en dimension $d = 2$ du cas plus général $d >= 3$, en effet, comme nous allons le voir, une théorie conforme en deux dimensions (comme la théorie des cordes) possède une algèbre de dimension infinie, tandis que, comme nous le verrons, une CFT en $d >= 3$ présente une algèbre de dimension finie. Il s'en suit que l'étude des théories conformes en $d >= 3$ dimensions est moins simple et c'est celles-ci qui nous intéresserons dans la suite. Il existe également des CFT unidimensionnelles, mais nous ne ferrons que les mentionner.
 
-Dans la plupart des cas qui vont nous intéresser, nous considérerons également un espace-temps plat, donc $g_(mu nu) = eta_(mu nu)$. L'étude d'une CFT où la métrique n'est pas plate ou n'est pas suffisamment simple ne semble en effet pas pertinente : les cas physiques dont les symétries conformes sont d'intérêt standard et principale ne font pas intervenir de gravité (un contre exemple important est la correspondance AdS/CFT) et, si c'était le cas, les solutions analytiques seraient probablement trop difficiles à trouver, pour autant qu'il en existe.
+Dans la plupart des cas qui vont nous intéresser, nous considérerons également un espace-temps plat, donc $g_(mu nu) = eta_(mu nu)$. L'étude d'une CFT où la métrique n'est pas plate ou n'est pas suffisamment simple ne semble en effet pas pertinente : les cas physiques dont les symétries conformes sont d'intérêt standard et principal ne font pas intervenir de gravité (un contre exemple important est la correspondance AdS/CFT) et, si c'était le cas, les solutions analytiques seraient probablement trop difficiles à trouver, pour autant qu'il en existe.
 
 == Transformation conforme
 Nous définirons une _transformation conforme_ comme un certain changement de coordonnées, un difféomorphisme, $x^mu -> x'^mu (x^mu)$ laissant la métrique invariante à une fonction de la position près que nous appellerons _le facteur d'échelle_. Afin que la nouvelle métrique soit bien définie, positive et non nulle, la façon la plus naturelle de formuler cela consiste à écrire
@@ -584,7 +582,7 @@ $
   #annot(<scale1>, pos: top, yshift: 1em)[facteur d'échelle]
 $
 
-En fonction de ce qui est plus commode, nous utiliserons l'une ou l'autre de ses conventions. Notons que si le facteur d'échelle se réduit à la constante $1$, alors cela signifie que la transformation conserve intégralement la structure de la métrique de l'espace-temps, hors nous savons que l'ensemble des transformations qui laissent la métrique de Minkowski invariante forment le _groupe de Poincaré_, qui inclus les transformations de Lorentz. Autrement dit, nous pouvons déjà constater que le groupe des transformations conformes, le _groupe conforme_, contient le groupe de Poincaré. Nous utiliserons ce fait dans la suite, nous nous attendons en effet à revoir émerger les générateurs associés que nous connaissons déjà.
+En fonction de ce qui est plus commode, nous utiliserons l'une ou l'autre de ces conventions. Notons que si le facteur d'échelle se réduit à la constante $1$, alors cela signifie que la transformation conserve intégralement la structure de la métrique de l'espace-temps, or nous savons que l'ensemble des transformations qui laissent la métrique de Minkowski invariante forment le _groupe de Poincaré_, qui inclut les transformations de Lorentz. Autrement dit, nous pouvons déjà constater que le groupe des transformations conformes, le _groupe conforme_, contient le groupe de Poincaré. Nous utiliserons ce fait dans la suite, nous nous attendons en effet à revoir émerger les générateurs associés que nous connaissons déjà.
 
 #remark[
   Une transformation conforme et une transformation de Weyl sont deux transformations différentes : une transformation de Weyl n'est pas un changement de coordonnées, mais simplement un rescaling de la métrique.
@@ -609,7 +607,7 @@ Trouver un exemple qui reste relativement simple n'est pas évident, mais cela n
   $
     x' = x^2 - y^2, space.quad y' = 2 x y.
   $
-  Pour calculer $dd s' = dd x'^2 + dd y'^2$, on calcul les différentielles suivantes :
+  Pour calculer $dd s' = dd x'^2 + dd y'^2$, on calcule les différentielles suivantes :
   $
     dd x' = 2x dd x - 2y dd y, space.quad dd y' = 2x dd y + 2y dd x
   $
@@ -623,14 +621,14 @@ Trouver un exemple qui reste relativement simple n'est pas évident, mais cela n
     dd s'^2 &= (dd x')^2 + (dd y')^2 \
             &= 4(x^2 + y^2)(dd x^2 + dd y^2).
   $
-  Autrement dit, on a bien une transformation des coordonnées qui est telle que la nouvelle métrique soit proportionnelle à l'ancienne à une fonction des coordonnées près. Plus explicitement,
+  Autrement dit, on a bien une transformation des coordonnées qui est telle que la nouvelle métrique est proportionnelle à l'ancienne à une fonction des coordonnées près. Plus explicitement,
   $
     dd s'^2 = Omega(x, y)^2 dd s^2 space.quad " avec " space.quad Omega(x, y) = 2 sqrt(x^2 + y^2).
   $
 ]
 
 == Dérivation du groupe et de l'algèbre conformes
-Dans un premier temps, nous allons travailler avec une transformation infinitésimale arbitraire que l'on va ensuite contraindre à être conforme de façon à obtenir les relations utiles pour la suite. Notre démarche est inspirée par. Considérons donc une transformation infinitésimale au premier ordre d'une coordonnée $x^mu$, $ x'^mu = x^mu + epsilon^mu (x) + cal(O)(epsilon^2) $<arb1> et rappelons que pour un changement de coordonnée $x -> x'$ arbitraire, la métrique se transforme suivant
+Dans un premier temps, nous allons travailler avec une transformation infinitésimale arbitraire que l'on va ensuite contraindre à être conforme de façon à obtenir les relations utiles pour la suite. Considérons donc une transformation infinitésimale au premier ordre d'une coordonnée $x^mu$, $ x'^mu = x^mu + epsilon^mu (x) + cal(O)(epsilon^2) $<arb1> et rappelons que pour un changement de coordonnée $x -> x'$ arbitraire, la métrique se transforme suivant
 
 $
   eta'_(mu nu)(x') = eta_(rho sigma) frac(partial x'^rho, partial x^mu)frac(partial x'^sigma, partial x^nu).
@@ -717,7 +715,7 @@ $
   (d - 1) square (partial dot epsilon) = 0
 $ <temp2>
 
-où, pour rappel, $d > 0$ est la dimension de notre espace-temps obtenu par contraction de la métrique avec elle-même. Notez que si $d$ était égale à 2 dans #ref(<f4>), nous n'aurions pas obtenu ce résultat, tandis que pour tout autre $d > 0$ ce résultat tient.
+où, pour rappel, $d > 0$ est la dimension de notre espace-temps obtenu par contraction de la métrique avec elle-même. Notons que si $d$ était égale à 2 dans #ref(<f4>), nous n'aurions pas obtenu ce résultat, tandis que pour tout autre $d > 0$ ce résultat tient.
 
 #remark[
   Nous profitons également du fait de parler des dimensions de l'espace-temps pour mentionner que nous appellerons une théorie conforme en dimension $d = 1$ une _mécanique quantique conforme_, en effet si l'on considère que la dimension est le temps, la théorie quantique des champs unidimensionnelle décrit l'évolution temporelle d'un système vivant dans zéro dimension spatiale, c'est-à-dire en un seul point, de sorte qu'il ne s'agit pas vraiment d'une théorie des champs, mais d'une mécanique quantique.
@@ -731,11 +729,11 @@ $<quad>
 
 où $a_mu$, $b_(mu nu)$ et $c_(mu nu rho)$ sont des paramètres à déduire. Remarquons que $c_(mu nu rho)$ est symétrique sous l'échange de $nu$ et $rho$. Résumons ce que nous avons fait jusqu'à présent :
 
- 1. Nous avons considéré un changement de coordonnées infinitésimale tout à fait générale ;
+ 1. Nous avons considéré un changement de coordonnées infinitésimale tout à fait général ;
  2. Nous avons contraint cette transformation à être conforme ;
  3. Après manipulations, nous sommes arrivé à une expression quadratique pour $epsilon$.
 
-Puisque $epsilon$ est contraint par la définition de la transformation conforme, et ce de façon indépendante de la position, nous sommes en mesure d'étudier chaque terme de #ref(<quad>) individuellement. Le premier est le plus simple à comprendre : $a_mu$ correspond à une _translation_, il s'en suit que le générateur associé est déjà connu (il faut se souvenir des générateurs du groupe de Lorentz), c'est $hat(P)_mu = -i partial_mu$, l'opérateur d'impulsion. Le terme linéaire en $x^nu$, $b_(mu nu)$, correspond, lui, à un _rescaling_. Pour trouver (ou identifier !) le générateur associé, nous allons utiliser l'équation de Killing conforme #ref(<temp1>) et y insérer un terme linéaire $epsilon_mu = b_(mu nu) x^nu$,
+Puisque $epsilon$ est contraint par la définition de la transformation conforme, et ce de façon indépendante de la position, nous sommes en mesure d'étudier chaque terme de #ref(<quad>) individuellement. Le premier est le plus simple à comprendre : $a_mu$ correspond à une _translation_, il s'en suit que le générateur associé est déjà connu (il faut se souvenir des générateurs du groupe de Poincaré), c'est $hat(P)_mu = -i partial_mu$, l'opérateur d'impulsion. Le terme linéaire en $x^nu$, $b_(mu nu)$, correspond, lui, à un _rescaling_. Pour trouver (ou identifier !) le générateur associé, nous allons utiliser l'équation de Killing conforme #ref(<temp1>) et y insérer un terme linéaire $epsilon_mu = b_(mu nu) x^nu$,
 
 $
       & space partial_mu epsilon_nu + partial_nu epsilon_mu = 2/d (partial dot epsilon) eta_(mu nu) \
@@ -765,7 +763,7 @@ $
         &= (1 + alpha) x^mu
 $
 
-dont le générateur associé s'écrit $hat(D) = -i x^mu partial_mu$. Maintenant, intéressons-nous au terme quadratique $c_(mu nu rho)$, ici la transformation et le générateur associée sont moins évidents. Nous allons commencer par développer un résultat intermédiaire qui nous permettra d'étudier une expression avec trois indices (en effet si on veut étudier $c_(mu nu rho)$ qui est de rang 3 alors c'est la moindre des choses). Considérons l'application de $partial_rho$ sur l'équation de Killing conforme #ref(<temp1>) et permutons les indices de façon cyclique :
+dont le générateur associé s'écrit $hat(D) = -i x^mu partial_mu$. Maintenant, intéressons-nous au terme quadratique $c_(mu nu rho)$, ici la transformation et le générateur associé sont moins évidents. Nous allons commencer par développer un résultat intermédiaire qui nous permettra d'étudier une expression avec trois indices (en effet si on veut étudier $c_(mu nu rho)$ qui est de rang 3 alors c'est la moindre des choses). Considérons l'application de $partial_rho$ sur l'équation de Killing conforme #ref(<temp1>) et permutons les indices de façon cyclique :
 
 $
   partial_rho partial_mu epsilon_nu + partial_rho partial_nu epsilon_mu &= 2\/d space eta_(mu nu) partial_rho (partial dot epsilon) space.quad "(a)" \
@@ -827,7 +825,7 @@ $
   hat(K)_mu = -i(2 x_mu x^nu partial_nu - (x^2) partial_mu).
 $
 
-Pour résumer, nous avons déterminer quatre générateurs infinitésimaux, que nous reprenons ici résumé dans le tableau suivant :
+Pour résumer, nous avons déterminé quatre générateurs infinitésimaux, que nous reprenons ici résumé dans le tableau suivant :
 
 #align(center,
   table(
@@ -842,7 +840,7 @@ Pour résumer, nous avons déterminer quatre générateurs infinitésimaux, que 
   )
 )
 
-Les deux premiers générateurs sont donc associés au groupe de Poincaré tandis que les deux seconds sont induits par les symétries conformes (dilatation et transformation conforme spéciale respectivement). Nous pouvons explicitement réécrire tout les termes de $epsilon^mu$ développés :
+Les deux premiers générateurs sont donc associés au groupe de Poincaré tandis que les deux seconds sont induits par les symétries conformes (dilatation et transformation conforme spéciale respectivement). Nous pouvons explicitement réécrire tous les termes de $epsilon^mu$ développés :
 
 #v(2.5em)
 $
@@ -866,13 +864,13 @@ $
         &= frac(x^mu - b^mu x^2, 1 - 2 b dot x + b^2 x^2).
 $
 
-Nous pouvons constater que c'est une transformation présentant des points singuliers (mais sous forme infinitésimale ça n'est pas le cas, comme on peut le constater dans le tableau plus haut et de toute façon en physique on s'intéresse aux transformations infinitésimales dans le cadre des algèbres de Lie). Le dénominateur s'annule en effet en $x^mu = b^(-2) b^mu$. Cette transformation peut se comprendre comme la composition d'une inversion, d'une translation et d'une autre inversion. Si l'on veut définir une transformation spéciale conforme finie qui soit globalement définie alors il faut considérer la _compactification_, mais cela ne sera pas abordé.
+Nous pouvons constater que c'est une transformation présentant des points singuliers (mais sous forme infinitésimale ça n'est pas le cas, comme on peut le constater dans le tableau plus haut et de toute façon en physique on s'intéresse aux transformations infinitésimales dans le cadre des algèbres de Lie). Le dénominateur s'annule en effet en $x^mu = b^(-2) b^mu$. Cette transformation peut se comprendre comme la composition d'une inversion $x^μ → x^μ\/x^2 = y^μ$, d'une translation $y^μ → y^μ − b^μ = z^μ$ et d'une autre inversion $z^μ → z^μ\/z^2 = x′^μ$. Si l'on veut définir une transformation spéciale conforme finie qui soit globalement définie alors il faut considérer la _compactification_, mais cela ne sera pas abordé.
 
 #remark[
-  Les groupes sont des objets non-linéaires et compliqués, c'est pourquoi en physique on préfère travailler avec les espaces qui leur sont tangents (on choisi souvent tangent à l'identité par commodité), ce qui correspond aux algèbres de Lie, où toute transformation est bien définie partout.
+  Les groupes sont des objets non linéaires et compliqués, c'est pourquoi en physique on préfère travailler avec les espaces qui leur sont tangents (on choisi souvent tangent à l'identité par commodité), ce qui correspond aux algèbres de Lie, où toute transformation est bien définie partout.
 ]
 
-Maintenant que nous avons les générateurs, nous pouvons calculer les différents commutateurs afin de déduire l'algèbre de Lie du groupe conforme. Les relations de commutations entre les générateurs du groupe de Poincaré sont déjà connu, et les autres se calculent donc plus ou moins laborieusement. Nous pouvons donc trouver les relations suivantes :
+Maintenant que nous avons les générateurs, nous pouvons calculer les différents commutateurs afin de déduire l'algèbre de Lie du groupe conforme. Les relations de commutations entre les générateurs du groupe de Poincaré sont déjà connues, et les autres se calculent donc plus ou moins laborieusement. Nous pouvons donc trouver les relations suivantes :
 
 $
   & [hat(D), hat(P)_mu] = i hat(P)_mu \
@@ -883,16 +881,10 @@ $
   & [hat(L)_(mu nu), L_(rho sigma)] = i (eta_(nu rho) hat(L)_(mu sigma) + eta_(mu sigma) hat(L)_(nu rho) - eta_(mu rho) hat(L)_(nu sigma) - eta_(nu sigma) hat(L)_(mu rho))
 $
 
-où tout les autres commutateurs sont nuls. Cela défini donc l'algèbre de Lie du groupe conforme. Il est possible de montrer que les objets suivant :
-
-$
-  C_2 := 1/2 hat(L)^(mu nu)hat(L)_(mu nu), space.quad C_3 := 1/2 hat(L)^(mu nu)hat(L)_(nu rho)hat(L)^rho_(space.en mu), space.quad C_4 := hat(L)^(mu nu)hat(L)_(nu rho)hat(L)^(rho sigma)hat(L)_(sigma mu)
-$
-
-commutent avec tout les générateurs, et sont donc des _casimirs_ de l'algèbre du groupe conforme, mais nous n'allons pas entrer davantage dans les détails. De plus, dans la suite, nous limiterons l'utilisation d'un petit chapeau "$hat$" sur les opérateurs.
+où tous les autres commutateurs sont nuls. Cela défini donc l'algèbre de Lie du groupe conforme.
 
 === Remarque sur le cas $d = 2$ : l'algèbre de Virasoro
-Nous n'allons pas entrer dans les détails d'une théorie conforme en $d = 2$ car il s'agit d'un sujet à part entier mais allons simplement faire quelques remarques sur pourquoi ce cas est distingué du cas $d >= 3$, nous avons en effet maintenant les outils suffisant pour comprendre en quoi les choses diffèrent. En $d = 2$, il est commode d'employer un système de coordonnées complexes, avec $z = x^1 + i x^2$ et $overline(z) = x^1 - i x^2$. En faisant ça, l'équation de Killing conforme #ref(<temp1>) prend la forme suivante (après quelques manipulations) :
+Nous n'allons pas entrer dans les détails d'une théorie conforme en $d = 2$ car il s'agit d'un sujet à part entier mais allons simplement faire quelques remarques sur pourquoi ce cas est distingué du cas $d >= 3$, nous avons en effet maintenant les outils suffisants pour comprendre en quoi les choses diffèrent. En $d = 2$, il est commode d'employer un système de coordonnées complexes, avec $z = x^1 + i x^2$ et $overline(z) = x^1 - i x^2$. En faisant ça, l'équation de Killing conforme #ref(<temp1>) prend la forme suivante (après quelques manipulations) :
 
 $
   cases(
@@ -918,7 +910,7 @@ $
           = ((d + 2)(d + 1))/2 "générateurs"
 $
 
-et il s'agit donc de la dimension de l'algèbre conforme à $d >= 3$. Notons que cela correspond au nombres de générateurs du groupe $"SO"(d + 1, 1)$ (selon la signature adoptée), en effet le groupe $"SO"(d + 1, 1)$ est l'ensemble des matrices orthogonales dans un espace de dimension $d+2$ (où l'on emprunte la signature $(d + 1, 1)$ si l'on est dans un espace de Minkowski ou $(d + 2, 0)$ si l'on est dans un espace euclidien selon les conventions) et, de façon générale, la dimension de $"SO"(n)$ est $(n(n - 1))\/2$ ou, en signature mixte $"SO"(p, q)$, la dimension s'exprime de façon analogue comme $((p + q)(p+q-1))\/2$. Si l'on spécifie au cas présent, càd $"SO"(d + 1, 1)$, alors on a $ dim("SO"(d + 1, 1)) = ((d + 2)(d + 1))/2 $ et l'on retrouve donc bien la même dimension que pour le groupe conforme.
+et il s'agit donc de la dimension de l'algèbre conforme à $d >= 3$. Notons que cela correspond au nombres de générateurs du groupe $"SO"(d + 1, 1)$ (selon la signature adoptée), en effet le groupe $"SO"(d + 1, 1)$ est l'ensemble des matrices orthogonales dans un espace de dimension $d+2$ et, de façon générale, la dimension de $"SO"(n)$ est $(n(n - 1))\/2$ ou, en signature mixte $"SO"(p, q)$, la dimension s'exprime de façon analogue comme $((p + q)(p+q-1))\/2$. Si l'on spécifie au cas présent, càd $"SO"(d + 1, 1)$, alors on a $ dim("SO"(d + 1, 1)) = ((d + 2)(d + 1))/2 $ et l'on retrouve donc bien la même dimension que pour le groupe conforme.
 
 #remark[
   En dimension $d$, les rotations (ou plus généralement les transformations orthogonales) se font dans des plans bidimensionnelles. Un tel "plan de rotation" est défini par le choix de deux axes parmi $d$ possibles, le nombre de façons de choisir $2$ axes parmi $d$ est $ binom(d, 2) = (d(d - 1))/2 $ d'où le résultat obtenu pour les rotations si l'on ne se souvient plus du nombre de générateurs du groupe orthogonal.
@@ -945,7 +937,7 @@ Cette sous-section n'est pas dédiée à l'établissement de la matrice S étant
 Notons avant tout que ça n'est pas parce que la théorie conforme des champs n'admet pas de matrice S que la matrice S, dans une autre théorie, n'admet pas de symétries conformes. Rappelons que la matrice S est définie comme la matrice (unitaire) reliant des états de particules _asymptotiquement_ libres $ket("in")$ et $ket("out")$ dans un espace de Hilbert. Maintenant, rappelons qu'une théorie conforme des champs est invariante sous les symétries conformes, et plus particulièrement sous la _dilatation_. Autrement dit, à cause de l'invariance sous dilatation, le concept même d'être "asymptotiquement éloigné" n'a plus vraiment de sens : en CFT, il n'existe pas d'états asymptotiques, donc _pas_ de matrice S à proprement parler.
 
 == Fonctions de corrélations
-Dans une théorie conforme des champs, les _fonctions de corrélations_ jouent en quelque sorte le rôle des observables de la théorie, il s'agit d'un objet central en CFT. Les fonctions de corrélations en physique sont assez similaires à celles que l'on retrouve en statistiques, elles mesures, comme on peut s'y attendre, le degré de corrélation entre deux variables aléatoires. C'est-à-dire la fréquence à laquelle deux variables aléatoires ont des valeurs similaires. Dans un contexte de théorie des champs, le lien est moins claire. Dans la théorie des champs, la fonction de corrélation à $n$ points est définie comme le produit fonctionnel moyen de $n$ champs à différentes positions,
+Dans une théorie conforme des champs, les _fonctions de corrélations_ jouent en quelque sorte le rôle des observables de la théorie, il s'agit d'un objet central en CFT. Les fonctions de corrélations en physique sont assez similaires à celles que l'on retrouve en statistiques, elles mesures, comme on peut s'y attendre, le degré de corrélation entre deux variables aléatoires. C'est-à-dire la fréquence à laquelle deux variables aléatoires ont des valeurs similaires. Dans un contexte de théorie des champs, le lien est moins clair. Dans la théorie des champs, la fonction de corrélation à $n$ points est définie comme le produit fonctionnel moyen de $n$ champs à différentes positions,
 
 $
   G_n (x_1, x_2, ..., x_n) &:= corr(phi(x_1) phi(x_2) ... phi(x_3)) \
@@ -961,10 +953,10 @@ $
   corr(A_1 phi_1 (x_1) A_2 phi_2 (x_2) ... A_n phi_n (x_n)) = (A_1 A_2 ... A_n) corr(phi_1 (x_1) phi_2 (x_2) ... phi_n (x_n))
 $
 
-où $A_k$ est une constante ou un opérateur des positions $x^mu$. La notion de fonction de corrélation dans le cadre de la CFT devrait devenir plus claire au fur et à mesure de son utilisation.
+où $A_k$ est une constante et où les $phi$'s sont fonctions des positions $x^mu$. La notion de fonction de corrélation dans le cadre de la CFT devrait devenir plus claire au fur et à mesure de son utilisation.
 
 == Dimension d'échelle (_scaling dimension_) d'un opérateur
-Dans la suite, nous aurons besoin d'un concept important qui est directement lié aux dilatations : la dimension d'échelle d'un opérateur. La dimension d'échelle est un nombre associé à un opérateur qui indique comment se dernier se comporte sous dilatation $x -> lambda x$. Cette notion est liée aux dimensions au sens de l'analyse dimensionnelle. Étant donné un opérateur quelconque $cal(O)(x)$, l'invariance sous dilatation $x -> lambda x$ implique que
+Dans la suite, nous aurons besoin d'un concept important qui est directement lié aux dilatations : la dimension d'échelle d'un opérateur. La dimension d'échelle est un nombre associé à un opérateur qui indique comment ce dernier se comporte sous dilatation $x -> lambda x$. Cette notion est liée aux dimensions au sens de l'analyse dimensionnelle. Étant donné un opérateur quelconque $cal(O)(x)$, l'invariance sous dilatation $x -> lambda x$ implique que
 
 $
   cal(O)(x) -> cal(O)(lambda x) = lambda^(-Delta) cal(O)(x)
@@ -972,7 +964,7 @@ $<dim1>
 
 où $Delta in RR$ est la _dimension d'échelle_ de l’opérateur $cal(O)$. Le nombre $Delta$ doit exister afin que les dimensions (donc à comprendre comme "les unités") soient respectées. Dans une théorie qui n'est pas invariance sous dilatation, les $Delta$ ne sont plus de simples nombres mais fonctions des échelles de distance. Ce concept n'est pas propre à la théorie conforme des champs.
 
-Souvent, on voudra déterminer quelle est la dimension d'échelle d'un opérateur ou d'un champs $phi(x)$, nous pouvons établir l'expression générale de cette dimension pour une théorie des champs. En se plaçant dans le système d'unités naturelles $ħ = 1 = c$, la distance est l'inverse de la masse, $[L] = [M]^(-1)$, et lorsque l'on étudie les unités d'échelle ce sont les exposants qui nous intéresses, donc on aura que si $m$ est un terme de masse et que $x$ est un terme de position, alors on prendra la convention selon laquelle $Delta_m = 1$ et $Delta_x = -1$. Pour déterminer la dimension d'échelle d'un champs $phi(x)$, considérons l'action
+Souvent, on voudra déterminer quelle est la dimension d'échelle d'un opérateur ou d'un champs $phi(x)$, nous pouvons établir l'expression générale de cette dimension pour une théorie des champs. En se plaçant dans le système d'unités naturelles $ħ = 1 = c$, la distance est l'inverse de la masse, $[L] = [M]^(-1)$, et lorsque l'on étudie les unités d'échelle ce sont les exposants qui nous intéressent, donc on aura que si $m$ est un terme de masse et que $x$ est un terme de position, alors on prendra la convention selon laquelle $Delta_m = 1$ et $Delta_x = -1$. Pour déterminer la dimension d'échelle d'un champs $phi(x)$, considérons l'action
 
 $
   S = 1/2 integral dd^d x space (partial_mu phi)^2.
@@ -984,7 +976,7 @@ $
   Delta_(dd^d x) = -d
 $
 
-puisque $Delta_x = -1$. Nous pouvons alors essayer trouver la dimension d'échelle de $phi$ :
+puisque $Delta_x = -1$. Nous pouvons alors essayer de trouver la dimension d'échelle de $phi$ :
 
 $
        & space Delta_S = Delta_(dd^d x) + 2 (Delta_(partial_mu) + Delta_phi) \
@@ -1047,7 +1039,7 @@ $
 L'invariance d'échelle des fonctions de corrélations sera le point de départ pour développer, par la suite, une équation importante (voir la section sur le bootstrap), nous y reviendrons plus tard.
 
 == Courants conservés et tenseur énergie-impulsion
-Par simplicité, considérons un champs scalaire $phi(x)$. Nous allons supposer que ce champs se transforme (sous une transformation de symétrie) suivant
+Par simplicité, considérons un champ scalaire $phi(x)$. Nous allons supposer que ce champ se transforme (sous une transformation de symétrie) suivant
 
 $
   cases(
@@ -1056,7 +1048,7 @@ $
   )
 $
 
-où $cal(F)$ est simplement la fonction de transformation du champs scalaire. En conséquence, nous avons les transformations infinitésimale associées suivantes :
+où $cal(F)$ est simplement la fonction de transformation du champ scalaire. En conséquence, nous avons les transformations infinitésimales associées suivantes :
 
 $
   & x^mu -> x'^mu (x) = x^mu + space mark(omega^A frac(delta, delta omega^A), padding: #.2em, radius: #10%, color: #red) space x^mu, \
@@ -1095,7 +1087,7 @@ $
                 &=  integral dd^d x space partial_mu j^mu_A omega^A (x)
 $<deltaomegaint>
 
-où $j^mu_A$ est le _courant de Noether_, définis par
+où $j^mu_A$ est le _courant de Noether_, défini par
 
 $
   j^mu_A (x) := space mark([frac(partial cal(L), partial (partial_mu phi)) partial_nu phi - eta^mu_(space.en nu) cal(L)], tag: #<set>, color: #red, padding: #.2em, radius: #10%) space frac(delta x^nu, delta omega^A) - frac(partial cal(L), partial (partial_mu phi)) frac(delta F, delta omega^A).
@@ -1160,7 +1152,7 @@ $
   <==> space.quad & markrect(T^mu_(space.en mu) = 0, padding: #.25em) space.
 $
 
-Autrement dit, sous symétries conformes, le tenseur énergie-impulsion est à trace nulle. Il s'agit d'un fait spécifique aux théories conforme des champs : toute CFT a un tenseur énergie-impulsion à trace nulle ! Dans une théorie conforme des champs, le fait que le tenseur énergie‑impulsion soit à trace nulle traduit l’invariance du système sous les dilatations. Concrètement, cela signifie que la dynamique du système ne fait intervenir aucun paramètre dimensionnel qui fixerait une échelle particulière, ce qui est au cœur de l’invariance conforme.
+Autrement dit, sous symétries conformes, le tenseur énergie-impulsion est à trace nulle. Il s'agit d'un fait spécifique aux théories conformes des champs : toute CFT a un tenseur énergie-impulsion à trace nulle ! Dans une théorie conforme des champs, le fait que le tenseur énergie‑impulsion soit à trace nulle traduit l’invariance du système sous les dilatations. Concrètement, cela signifie que la dynamique du système ne fait intervenir aucun paramètre dimensionnel qui fixerait une échelle particulière, ce qui est au cœur de l’invariance conforme.
 
 Les autres transformations de symétrie (rotation, dilatation et spéciale conforme) peuvent aussi être associées à un courant par une procédure similaire, nous n'allons cependant pas entrer dans les détails des calculs car cela n'est pas très utile pour la suite et c'est un travail qui n'est pas spécifique à la théorie conforme des champs.
 
@@ -1229,7 +1221,7 @@ $
   corr(delta_omega X) = -i integral dd^d x space sum_(k = 1)^n delta^((d))(x - x_k) corr(phi(x_1) ... G_A phi(x_k) ... phi(x_n)) omega^A.
 $ <deltaomegacorr1>
 
-Le fait de vouloir exprimer notre résultat dans une intégrale sera utile pour la suite. Utilisons maintenant une autre écriture équivalente pour exprimer $corr(delta_omega X)$ en utilisant la forme fonctionnelle précédente. Pour se faire, nous considérons la variation introduite précédemment sur $phi$ et exprimons explicitement $corr(X)$, ce qui devrait naturellement introduire un $corr(delta_omega X)$ :
+Le fait de vouloir exprimer notre résultat dans une intégrale sera utile pour la suite. Utilisons maintenant une autre écriture équivalente pour exprimer $corr(delta_omega X)$ en utilisant la forme fonctionnelle précédente. Pour ce faire, nous considérons la variation introduite précédemment sur $phi$ et exprimons explicitement $corr(X)$, ce qui devrait naturellement introduire un $corr(delta_omega X)$ :
 
 $
   corr(X) &= alpha integral [cal(D) phi'] space X' e^(-S[phi']) \
@@ -1273,6 +1265,9 @@ où nous avons ré-exprimé $X = phi(x_1) phi(x_2) ... phi(x_n)$. L'équation #r
 De façon très générale, les identités de Ward traduisent les contraintes imposées par une symétrie (interne ou de jauge par exemple) sur les fonctions de corrélation.
 
 === Identité de Ward-Takahashi et symétries conformes
+Connaissant les courants de Noether associés aux symétries conformes, il suffit de les utiliser dans l'équation de Ward-Takahashi #ref(<ward>) pour en déduire les identités de Ward conforme.
+
+/*
 Appliquons l'équation développée à la section précédente, #ref(<ward>), à une théorie conforme des champs. On parle parfois au pluriel des identités de Ward car la formule précédente nous en donne une pour chaque courant de Noether. Rappelons les courants de Noether associés aux symétries conformes :
 
 #align(center,
@@ -1289,6 +1284,7 @@ Appliquons l'équation développée à la section précédente, #ref(<ward>), à
 )
 
 Établissons maintenant les identités de Ward pour chacune de ces symétries.
+*/
 
 *Symétrie sous translation*
 
@@ -1383,7 +1379,7 @@ Où, pour rappel, $X := corr(phi(x_1) phi(x_2) ... phi(x_n))$. Les contributions
 */
 
 == Opérateurs primaires et descendants
-Les symétries conforment imposent des contraintes aux fonctions de corrélations. Une façon de classifier les opérateurs d'une théorie conforme des champs est directement issue de la représentation des générateurs du groupe conforme et est analogue aux opérateurs de créations de d'annihilation de l'oscillateur harmonique en mécanique quantique. Pour rendre cela manifeste, il est utile de se placer dans une autre convention que celle utilisée lors de la dérivation des générateurs associés aux transformations conformes. Nous allons utiliser
+Les symétries conforment imposent des contraintes aux fonctions de corrélations. Une façon de classifier les opérateurs d'une théorie conforme des champs est directement issue de la représentation des générateurs du groupe conforme et est analogue aux opérateurs de créations et d'annihilation de l'oscillateur harmonique en mécanique quantique. Pour rendre cela manifeste, il est utile de se placer dans une autre convention que celle utilisée lors de la dérivation des générateurs associées aux transformations conformes. Nous allons utiliser
 
 #align(center,
   table(
@@ -1394,7 +1390,7 @@ Les symétries conforment imposent des contraintes aux fonctions de corrélation
     [$hat(P)_mu = partial_mu$], [Translation],
     [$hat(L)_(mu nu) = x_nu partial_mu - x_mu partial_nu$], [Lorentz],
     [$hat(D) = x^mu partial_mu$], [Dilatation],
-    [$hat(K)_mu = 2 x_mu x^nu partial_nu - (x^2) partial_mu)$], [Spéciale conforme],
+    [$hat(K)_mu = 2 x_mu x^nu partial_nu - (x^2) partial_mu$], [Spéciale conforme],
   )
 )
 
@@ -1412,7 +1408,7 @@ $
   & [hat(D), hat(K)_mu] = -hat(K)_mu space.quad && <--> && space.quad [hat(N), hat(a)] = -hat(a)
 $
 
-où $hat(a)^dagger$ et $hat(a)$ sont les opérateurs de montée et de descente pour l'oscillateur harmonique, respectivement, et $hat(N)$ est l'opérateur de dénombrement ("number operator"). Cette similitude suggère que $hat(P)_mu$ et $hat(K)_mu$ peuvent être également compris comme des opérateurs de monter et de descente de $hat(D)$, ce qui est effectivement le cas. Nous allons choisir de travailler dans une base où nos états possèdent une valeur propre bien définie, $Delta$, sous dilatation (cela reviendra d'ailleurs un peu plus tard !) On note
+où $hat(a)^dagger$ et $hat(a)$ sont les opérateurs de montée et de descente pour l'oscillateur harmonique, respectivement, et $hat(N)$ est l'opérateur de dénombrement ("number operator"). Cette similitude suggère que $hat(P)_mu$ et $hat(K)_mu$ peuvent être également compris comme des opérateurs de montée et de descente de $hat(D)$, ce qui est effectivement le cas. Nous allons choisir de travailler dans une base où nos états possèdent une valeur propre bien définie, $Delta$, sous dilatation (cela reviendra d'ailleurs un peu plus tard !) On note
 
 $
   ket(Delta) = "état avec dimension" Delta.
@@ -1467,7 +1463,7 @@ $
 
 où, à la dernière ligne, nous avons utilisé le fait que $hat(K)_mu$ est associé à une symétrie du système, et donc qu'il annihile le vide, comme avant. Autrement dit, cette relation de commutation rend bien compte de l'annihilation souhaitée.
 
-Qu'en est-t-il de $hat(P)_mu$ maintenant ? Les états que nous avons discutés précédemment sont ceux de plus "faibles poids" (si l'on garde la similitude avec l'oscillateur harmonique), on voudrait donc voir ce qu'il se passe si l'on agit dessus avec $hat(P)_mu$, qui est censé se comporter comme un opérateur de montée. Considérons un nouvel état $ket(psi)$ qui est créé en faisant agir $hat(P)_mu$ sur un état propre de l'opérateur de dilatation,
+Qu'en est-t-il de $hat(P)_mu$ maintenant ? Les états dont nous avons discutés précédemment sont ceux de plus "faibles poids" (si l'on garde la similitude avec l'oscillateur harmonique), on voudrait donc voir ce qu'il se passe si l'on agit dessus avec $hat(P)_mu$, qui est censé se comporter comme un opérateur de montée. Considérons un nouvel état $ket(psi)$ qui est créé en faisant agir $hat(P)_mu$ sur un état propre de l'opérateur de dilatation,
 
 $
   hat(P)_mu ket(Delta) = ket(psi)
@@ -1509,7 +1505,7 @@ $
 $<density>
 #v(1em)
 
-Les opérateurs descendants ne se transforment pas aussi bien et nous les invoquerons donc qu'implicitement, au travers des opérateurs primaires d'où ils sont issus par l'action de $hat(P)_mu$. Nous n'utiliserons pas cette formule par la suite, nous ne l'a prenons que comme remarque.
+Les opérateurs descendants ne se transforment pas aussi bien et nous les invoquerons donc qu'implicitement, au travers des opérateurs primaires d'où ils sont issus par l'action de $hat(P)_mu$.
 
 
 
@@ -1529,7 +1525,7 @@ $
   ket(psi) = sum_k C_k ket(Delta_k)
 $
 
-où l'état $ket(Delta_k)$ inclus un opérateur primaire et tout ses descendants (en effet pour avoir une base complète on doit sommer sur tout les opérateurs). Réorganisons cette expression : 
+où l'état $ket(Delta_k)$ inclut un opérateur primaire et tout ses descendants (en effet pour avoir une base complète on doit sommer sur tout les opérateurs). Réorganisons cette expression : 
 
 $
   ket(psi) &= phi_1(x) phi_2(0) ket(0) \
@@ -1537,7 +1533,7 @@ $
            &= sum_(phi_I) C_(Delta, I) (x, partial) phi_I (0) ket(0)
 $
 
-où cette fois nous rendons explicite le fait que nous sommons sur les opérateurs primaires, les opérateurs descendants de $phi$ ayant été pris en compte dans le coefficient $C$ par l'action de la dérivée partielle (rappelons en effet qu'un opérateur descendant est défini à une constante près comme une $n$-dérivée partielle d'un opérateur primaire). Chaque terme de la somme inclus donc un opérateur primaire et tout ses descendants. Nous avons également inclus un indice $Delta$ pour la dimension d'échelle de l'opérateur primaire et un indice $I$ pour la représentation de Lorentz associée à cet opérateur. Nous avons tout exprimé en termes d'états, mais cela n'était que pour partir d'une analogie de quelque chose de connu et nous pouvons oublié le fait que nous parlions d'états,
+où cette fois nous rendons explicite le fait que nous sommons sur les opérateurs primaires, les opérateurs descendants de $phi$ ayant été pris en compte dans le coefficient $C$ par l'action de la dérivée partielle (rappelons en effet qu'un opérateur descendant est défini à une constante près comme une $n$-dérivée partielle d'un opérateur primaire). Chaque terme de la somme inclut donc un opérateur primaire et tous ses descendants. Nous avons également inclus un indice $Delta$ pour la dimension d'échelle de l'opérateur primaire et un indice $I$ pour la représentation de Lorentz associée à cet opérateur. Nous avons tout exprimé en termes d'états, mais cela n'était que pour partir d'une analogie de quelque chose de connu et nous pouvons oublier le fait que nous parlions d'états,
 
 $
   cancel(ket(psi), stroke: #(paint: red, dash: "dashed", thickness: 0.7pt), cross: #true)
@@ -1559,7 +1555,7 @@ C'est ce qu'on appelle l'_Operator Product Expansion_ (abrégé OPE); et cela ne
  2. les autres opérateurs qui se trouvent dans la fonction de corrélation doivent être "suffisamment éloignés" du produit considéré.
 
 #remark[
-  Si l'on tente d'être formel, le second point peut s'interpréter de la sorte : les autres opérateurs qui se trouvent dans la fonction de corrélation doivent se situés à l'extérieur d'une sphère de rayon $abs(x)$, autrement il y a des problèmes de convergence et l'OPE n'est pas assurée de converger.
+  Si l'on tente d'être formel, le second point peut s'interpréter de la sorte : les autres opérateurs qui se trouvent dans la fonction de corrélation doivent se situer à l'extérieur d'une sphère de rayon $abs(x)$, autrement il y a des problèmes de convergence et l'OPE n'est pas assurée de converger.
 ]
 
 En fait, selon le point de vue adopté, la discussion précédente est soit postulée pour la théorie conforme des champs, soit démontrable. En CFT pure, sans réel autre préalable qui n'ait été présenté dans ce document, nous ne pouvons pas faire mieux que de prendre comme axiome les points précédents et allons, de plus, supposer que l'OPE converge dans le cadre de la CFT.
@@ -1640,7 +1636,7 @@ La figure #ref(<OPE_fig>) illustre schématiquement cette nouvelle notion d'_Ope
   Il s'avère que, numériquement, l'OPE est une opération qui converge rapidement. Cela sera particulièrement intéressant pour le bootstrap.
 ]
 
-On pourrait se poser la question suivante : étant donné que nous avons dit à plusieurs reprises qu'une théorie invariante sous dilatation ne possède plus vraiment de notion d'être "proche" ou "éloigné" (souvenons nous par exemple de l'argument donné pour la matrice S), pourquoi dit-t-on que l'OPE entre deux opérateurs ne se fait que si ces derniers sont "suffisamment proches" ? La réponse est simple : ici, on compare des distances _relatives_, ce qui élimine donc l'invariance sous dilatation de la discussion, et ce qui nous permet donc de bien établir l'OPE.
+On pourrait se poser la question suivante : étant donné que nous avons dit à plusieurs reprises qu'une théorie invariante sous dilatation ne possède plus vraiment de notion d'être "proche" ou "éloigné" (souvenons-nous par exemple de l'argument donné pour la matrice S), pourquoi dit-t-on que l'OPE entre deux opérateurs ne se fait que si ces derniers sont "suffisamment proches" ? La réponse est simple : ici, on compare des distances _relatives_, ce qui élimine donc l'invariance sous dilatation de la discussion, et ce qui nous permet donc de bien établir l'OPE.
 
 Comme cela a été fait remarqué, l'OPE est définie vis-à-vis de la distance relative, d'où le choix arbitraire du produit $phi(x) phi(0)$ dans la définition #ref(<OPE>), nous pourrions imaginer une définition tout à fait équivalente où l'on prend le produit $phi(x_1)phi(x_2)$ :
 
@@ -1696,7 +1692,7 @@ $
   K(x, y) := corr(phi(x) phi(y))
 $
 
-bien dans le cadre d'une théorie quantique des champs, on préférera parler de _propagateur_, dans ce qui nous intéresse ces termes sont interchangeables. Puisque l'action mène à l'équation de Klein-Gordon, on sait que ce propagateur doit satisfaire
+bien que dans le cadre d'une théorie quantique des champs, on préférera parler de _propagateur_, dans ce qui nous intéresse ces termes sont interchangeables. Puisque l'action mène à l'équation de Klein-Gordon, on sait que ce propagateur doit satisfaire
 
 $
   g(-square + m^2) K(x, y) = delta^((2))(x - y)
@@ -1766,9 +1762,9 @@ et de là il est maintenant manifeste que nous avons les OPE suivante :
 
 #v(0.5em)
 $
-  & markrect(partial_z phi(z, macron(z)) partial_omega phi(omega, macron(omega)) ~ frac(1, 4 pi g) frac(1, (z - omega)^2), padding: #.5em) \
+  & markrect(partial_z phi(z, macron(z)) partial_omega phi(omega, macron(omega)) ~ frac(1, 4 pi g) frac(1, (z - omega)^2) + ..., padding: #.5em) \
   #v(4.5em)
-  & markrect(partial_(macron(z)) phi(z, macron(z)) partial_(macron(omega)) phi(omega, macron(omega)) ~ frac(1, 4 pi g) frac(1, (macron(z) - macron(omega))^2), padding: #.5em)
+  & markrect(partial_(macron(z)) phi(z, macron(z)) partial_(macron(omega)) phi(omega, macron(omega)) ~ frac(1, 4 pi g) frac(1, (macron(z) - macron(omega))^2) + ..., padding: #.5em)
 $<bo2>
 #v(0.5em)
 
